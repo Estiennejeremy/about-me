@@ -53,7 +53,6 @@
             font-weight: 600;
             font-size: 14px;
             color: #fff;
-            /* FIX: Largeur fixe pour éviter le décalage */
             min-width: 120px;
             text-align: center;
             white-space: nowrap;
@@ -87,7 +86,6 @@
             margin-bottom: 20px;
             opacity: 0;
             animation: slideUp 1s ease 0.2s forwards;
-            /* FIX: Hauteur minimale pour éviter le saut */
             min-height: 1.5em;
         }
 
@@ -120,7 +118,6 @@
             align-items: center;
             opacity: 0;
             animation: slideUp 1s ease 0.8s forwards;
-            /* FIX: Flexbox avec wrap et alignement cohérent */
             flex-wrap: wrap;
         }
 
@@ -138,7 +135,6 @@
             cursor: pointer;
             position: relative;
             overflow: hidden;
-            /* FIX: Largeur minimale pour éviter les changements de taille */
             min-width: 160px;
             text-align: center;
             justify-content: center;
@@ -190,7 +186,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             position: relative;
-            /* FIX: Hauteur minimale pour éviter le saut */
             min-height: 1.2em;
         }
 
@@ -246,7 +241,6 @@
             font-size: 20px;
             font-weight: 600;
             color: #fff;
-            /* FIX: Hauteur minimale pour éviter le décalage */
             min-height: 1.2em;
         }
 
@@ -311,7 +305,6 @@
             font-weight: 700;
             color: #fff;
             margin-bottom: 5px;
-            /* FIX: Hauteur minimale */
             min-height: 1.2em;
         }
 
@@ -344,7 +337,6 @@
             color: #ccc;
             line-height: 1.7;
             margin-bottom: 20px;
-            /* FIX: Hauteur minimale pour éviter le saut */
             min-height: 3em;
         }
 
@@ -362,7 +354,6 @@
             font-size: 12px;
             font-weight: 500;
             border: 1px solid rgba(255, 107, 53, 0.2);
-            /* FIX: Éviter les changements de taille */
             white-space: nowrap;
         }
 
@@ -388,7 +379,6 @@
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
-            /* FIX: Hauteur minimale */
             min-height: 2.5em;
         }
 
@@ -485,7 +475,6 @@
             font-weight: 600;
             color: #ff6b35;
             margin-bottom: 15px;
-            /* FIX: Hauteur minimale */
             min-height: 1.5em;
         }
 
@@ -493,7 +482,6 @@
             color: #ccc;
             line-height: 1.6;
             font-size: 1rem;
-            /* FIX: Hauteur minimale */
             min-height: 4em;
         }
 
@@ -1321,7 +1309,6 @@
             }
         });
 
-        // Close modal with Escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeModal();
@@ -1332,7 +1319,6 @@
             const langBtn = document.getElementById('langBtn');
             const elements = document.querySelectorAll('[data-fr][data-en]');
             
-            // FIX: Ajouter une classe pour la transition
             document.body.classList.add('lang-switching');
             
             if (currentLang === 'fr') {
@@ -1353,13 +1339,11 @@
                 document.title = 'Jeremy Estienne - Ingénieur Logiciel';
             }
             
-            // FIX: Retirer la classe après la transition
             setTimeout(() => {
                 document.body.classList.remove('lang-switching');
             }, 300);
         }
 
-        // Custom cursor
         const cursor = document.querySelector('.cursor');
         const links = document.querySelectorAll('a, .skill-card, .experience-card, .lang-switch');
 
@@ -1377,7 +1361,6 @@
             });
         });
 
-        // Scroll animations
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1407,7 +1390,6 @@
             });
         });
 
-        // Parallax effect for floating shapes
         window.addEventListener('scroll', () => {
             const scrolled = window.pageYOffset;
             const shapes = document.querySelectorAll('.shape');
@@ -1418,7 +1400,6 @@
             });
         });
 
-        // Add stagger animation to skill cards
         const skillCards = document.querySelectorAll('.skill-card');
         skillCards.forEach((card, index) => {
             card.style.animationDelay = `${index * 0.1}s`;
