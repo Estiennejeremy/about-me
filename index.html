@@ -497,7 +497,128 @@
             min-height: 4em;
         }
 
-        @media (max-width: 768px) {
+        /* AI Expertise Section Styles */
+        .ai-expertise-section {
+            margin-top: 60px;
+            padding-top: 60px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .ai-section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 50px;
+            text-align: center;
+            background: linear-gradient(135deg, #00ff88 0%, #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        .ai-section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, #00ff88, #00cc6a);
+            border-radius: 2px;
+        }
+
+        .ai-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .ai-card {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 20px;
+            padding: 40px 30px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ai-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #00ff88, #00cc6a, #00ff88);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+            transform-origin: left;
+        }
+
+        .ai-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .ai-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(0, 255, 136, 0.4);
+            box-shadow: 0 30px 60px rgba(0, 255, 136, 0.15);
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.08) 0%, rgba(255, 255, 255, 0.04) 100%);
+        }
+
+        .ai-card-icon {
+            font-size: 3rem;
+            margin-bottom: 25px;
+            display: block;
+            text-align: center;
+            filter: drop-shadow(0 0 10px rgba(0, 255, 136, 0.3));
+        }
+
+        .ai-card-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #00ff88;
+            margin-bottom: 20px;
+            text-align: center;
+            min-height: 1.5em;
+        }
+
+        .ai-card-description {
+            color: #ccc;
+            line-height: 1.7;
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+            text-align: left;
+            min-height: 4.5em;
+        }
+
+        .ai-card-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .tech-tag {
+            background: rgba(0, 255, 136, 0.15);
+            color: #00ff88;
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .tech-tag:hover {
+            background: rgba(0, 255, 136, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 255, 136, 0.2);
+        }
             .sports-header {
                 flex-direction: column;
                 text-align: center;
@@ -547,6 +668,24 @@
         }
 
         @media (max-width: 768px) {
+            .ai-cards-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .ai-card {
+                padding: 30px 20px;
+            }
+
+            .ai-section-title {
+                font-size: 2rem;
+            }
+
+            .ai-card-description {
+                min-height: 5em;
+                font-size: 0.9rem;
+            }
+
             .hero, .section, .contact-section {
                 padding: 60px 30px;
             }
@@ -823,11 +962,68 @@
             </div>
             <div class="skill-card">
                 <span class="skill-icon">🤖</span>
+                <div class="skill-name" data-fr="Agents IA" data-en="AI Agents">Agents IA</div>
+            </div>
+            <div class="skill-card">
+                <span class="skill-icon">🧠</span>
+                <div class="skill-name" data-fr="Modèles IA" data-en="AI Models">Modèles IA</div>
+            </div>
+            <div class="skill-card">
+                <span class="skill-icon">🔗</span>
                 <div class="skill-name" data-fr="Intégration IA" data-en="AI Integration">Intégration IA</div>
             </div>
             <div class="skill-card">
                 <span class="skill-icon">🚀</span>
                 <div class="skill-name">DevOps</div>
+            </div>
+        </div>
+
+        <!-- AI Expertise Detail Section -->
+        <div class="ai-expertise-section">
+            <h3 class="ai-section-title" data-fr="Expertise en Intelligence Artificielle" data-en="Artificial Intelligence Expertise">Expertise en Intelligence Artificielle</h3>
+            
+            <div class="ai-cards-grid">
+                <div class="ai-card">
+                    <div class="ai-card-icon">🤖</div>
+                    <h4 class="ai-card-title" data-fr="Création d'Agents IA" data-en="AI Agents Creation">Création d'Agents IA</h4>
+                    <p class="ai-card-description" data-fr="Développement d'agents conversationnels autonomes avec Claude, GPT-4, et frameworks personnalisés. Intégration de mémoire contextuelle, prise de décision et exécution d'actions complexes." data-en="Development of autonomous conversational agents with Claude, GPT-4, and custom frameworks. Integration of contextual memory, decision-making and complex action execution.">
+                        Développement d'agents conversationnels autonomes avec Claude, GPT-4, et frameworks personnalisés. Intégration de mémoire contextuelle, prise de décision et exécution d'actions complexes.
+                    </p>
+                    <div class="ai-card-tech">
+                        <span class="tech-tag">Claude</span>
+                        <span class="tech-tag">OpenAI</span>
+                        <span class="tech-tag">LangChain</span>
+                        <span class="tech-tag">Vector DB</span>
+                    </div>
+                </div>
+
+                <div class="ai-card">
+                    <div class="ai-card-icon">🧠</div>
+                    <h4 class="ai-card-title" data-fr="Modèles IA Personnalisés" data-en="Custom AI Models">Modèles IA Personnalisés</h4>
+                    <p class="ai-card-description" data-fr="Fine-tuning et adaptation de modèles LLM pour des cas d'usage spécifiques. Création de pipelines d'entraînement, évaluation de performance et déploiement en production." data-en="Fine-tuning and adaptation of LLM models for specific use cases. Creation of training pipelines, performance evaluation and production deployment.">
+                        Fine-tuning et adaptation de modèles LLM pour des cas d'usage spécifiques. Création de pipelines d'entraînement, évaluation de performance et déploiement en production.
+                    </p>
+                    <div class="ai-card-tech">
+                        <span class="tech-tag">Transformers</span>
+                        <span class="tech-tag">PyTorch</span>
+                        <span class="tech-tag">Hugging Face</span>
+                        <span class="tech-tag">MLflow</span>
+                    </div>
+                </div>
+
+                <div class="ai-card">
+                    <div class="ai-card-icon">🔗</div>
+                    <h4 class="ai-card-title" data-fr="Intégration & Orchestration" data-en="Integration & Orchestration">Intégration & Orchestration</h4>
+                    <p class="ai-card-description" data-fr="Architecture de solutions IA en production avec APIs robustes, monitoring en temps réel et orchestration de workflows complexes via N8N et outils personnalisés." data-en="Production AI solutions architecture with robust APIs, real-time monitoring and complex workflow orchestration via N8N and custom tools.">
+                        Architecture de solutions IA en production avec APIs robustes, monitoring en temps réel et orchestration de workflows complexes via N8N et outils personnalisés.
+                    </p>
+                    <div class="ai-card-tech">
+                        <span class="tech-tag">N8N</span>
+                        <span class="tech-tag">AWS Bedrock</span>
+                        <span class="tech-tag">REST APIs</span>
+                        <span class="tech-tag">Webhooks</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
