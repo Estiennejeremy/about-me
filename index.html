@@ -418,6 +418,70 @@
             }
         }
 
+        /* Sports Section Styles - Compact Version */
+        .sports-compact {
+            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .sports-compact:hover {
+            border-color: rgba(0, 255, 136, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 255, 136, 0.1);
+        }
+
+        .sports-header {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .sports-icon {
+            font-size: 3rem;
+            animation: float 6s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+
+        .sports-text {
+            flex: 1;
+        }
+
+        .sports-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #00ff88;
+            margin-bottom: 15px;
+        }
+
+        .sports-description {
+            color: #ccc;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .sports-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            
+            .sports-compact {
+                padding: 30px 20px;
+            }
+            
+            .sports-title {
+                font-size: 1.3rem;
+            }
+            
+            .sports-description {
+                font-size: 0.95rem;
+            }
+        }
+
         @keyframes float {
             0%, 100% {
                 transform: translateY(0px) rotate(0deg);
@@ -701,11 +765,9 @@
                     Voir LinkedIn
                 </a>
             </div>
-        </div>
-        <div class="scroll-indicator" data-fr="↓ Défiler pour explorer" data-en="↓ Scroll to explore">
-            ↓ Défiler pour explorer
-        </div>
     </section>
+
+
 
     <!-- Skills Section -->
     <section class="section reveal">
@@ -805,6 +867,23 @@
             </div>
         </div>
     </section>
+
+
+    <!-- Sports & Challenges Section -->
+    <section class="section reveal">
+        <div class="sports-compact">
+            <div class="sports-header">
+                <div class="sports-icon">🏊‍♂️🚴‍♂️🏃‍♂️</div>
+                <div class="sports-text">
+                    <h3 class="sports-title" data-fr="Triathlon & Dépassement de Soi" data-en="Triathlon & Self-Transcendence">Triathlon & Dépassement de Soi</h3>
+                    <p class="sports-description" data-fr="Passionné de triathlon longue distance. Cette discipline m'apporte discipline, persévérance et gestion du stress - des qualités essentielles dans le développement de solutions techniques complexes." data-en="Passionate about long-distance triathlon. This discipline brings me discipline, perseverance and stress management - essential qualities in developing complex technical solutions.">
+                        Passionné de triathlon longue distance. Cette discipline m'apporte discipline, persévérance et gestion du stress - des qualités essentielles dans le développement de solutions techniques complexes.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
 
     <!-- Contact Section -->
     <section class="contact-section">
