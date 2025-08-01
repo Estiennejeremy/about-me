@@ -53,6 +53,10 @@
             font-weight: 600;
             font-size: 14px;
             color: #fff;
+            /* FIX: Largeur fixe pour éviter le décalage */
+            min-width: 120px;
+            text-align: center;
+            white-space: nowrap;
         }
 
         .lang-switch:hover {
@@ -83,6 +87,8 @@
             margin-bottom: 20px;
             opacity: 0;
             animation: slideUp 1s ease 0.2s forwards;
+            /* FIX: Hauteur minimale pour éviter le saut */
+            min-height: 1.5em;
         }
 
         .hero-title {
@@ -104,6 +110,8 @@
             margin-bottom: 50px;
             opacity: 0;
             animation: slideUp 1s ease 0.6s forwards;
+            /* FIX: Hauteur minimale pour éviter le décalage */
+            min-height: 3.5em;
         }
 
         .hero-cta {
@@ -112,6 +120,8 @@
             align-items: center;
             opacity: 0;
             animation: slideUp 1s ease 0.8s forwards;
+            /* FIX: Flexbox avec wrap et alignement cohérent */
+            flex-wrap: wrap;
         }
 
         .btn {
@@ -128,6 +138,11 @@
             cursor: pointer;
             position: relative;
             overflow: hidden;
+            /* FIX: Largeur minimale pour éviter les changements de taille */
+            min-width: 160px;
+            text-align: center;
+            justify-content: center;
+            white-space: nowrap;
         }
 
         .btn-primary {
@@ -175,6 +190,8 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             position: relative;
+            /* FIX: Hauteur minimale pour éviter le saut */
+            min-height: 1.2em;
         }
 
         .skills-grid {
@@ -229,6 +246,8 @@
             font-size: 20px;
             font-weight: 600;
             color: #fff;
+            /* FIX: Hauteur minimale pour éviter le décalage */
+            min-height: 1.2em;
         }
 
         .experience-timeline {
@@ -270,6 +289,7 @@
             padding: 40px;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             backdrop-filter: blur(10px);
+            cursor: pointer;
         }
 
         .experience-card:hover {
@@ -291,6 +311,8 @@
             font-weight: 700;
             color: #fff;
             margin-bottom: 5px;
+            /* FIX: Hauteur minimale */
+            min-height: 1.2em;
         }
 
         .experience-company {
@@ -307,6 +329,9 @@
             font-size: 14px;
             font-weight: 500;
             border: 1px solid rgba(0, 255, 136, 0.2);
+            /* FIX: Éviter le rétrécissement */
+            flex-shrink: 0;
+            white-space: nowrap;
         }
 
         .experience-location {
@@ -319,6 +344,8 @@
             color: #ccc;
             line-height: 1.7;
             margin-bottom: 20px;
+            /* FIX: Hauteur minimale pour éviter le saut */
+            min-height: 3em;
         }
 
         .experience-highlights {
@@ -335,6 +362,8 @@
             font-size: 12px;
             font-weight: 500;
             border: 1px solid rgba(0, 255, 136, 0.2);
+            /* FIX: Éviter les changements de taille */
+            white-space: nowrap;
         }
 
         .contact-section {
@@ -359,6 +388,8 @@
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
+            /* FIX: Hauteur minimale */
+            min-height: 2.5em;
         }
 
         .floating-shapes {
@@ -441,6 +472,7 @@
 
         .sports-icon {
             font-size: 3rem;
+            animation: float 6s ease-in-out infinite;
             flex-shrink: 0;
         }
 
@@ -453,12 +485,16 @@
             font-weight: 600;
             color: #00ff88;
             margin-bottom: 15px;
+            /* FIX: Hauteur minimale */
+            min-height: 1.5em;
         }
 
         .sports-description {
             color: #ccc;
             line-height: 1.6;
             font-size: 1rem;
+            /* FIX: Hauteur minimale */
+            min-height: 4em;
         }
 
         @media (max-width: 768px) {
@@ -478,6 +514,7 @@
             
             .sports-description {
                 font-size: 0.95rem;
+                min-height: 5em;
             }
         }
 
@@ -529,6 +566,7 @@
             .hero-cta {
                 flex-direction: column;
                 align-items: flex-start;
+                gap: 20px;
             }
 
             .experience-header {
@@ -540,6 +578,11 @@
                 right: 20px;
                 padding: 10px 16px;
                 font-size: 12px;
+                min-width: 100px;
+            }
+
+            .btn {
+                min-width: 140px;
             }
         }
 
@@ -696,16 +739,6 @@
             font-weight: bold;
         }
 
-        .experience-card {
-            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 20px;
-            padding: 40px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(10px);
-            cursor: pointer;
-        }
-
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -731,6 +764,15 @@
             .modal-tech-grid {
                 grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
             }
+        }
+
+        /* FIX: Animation fluide pour les changements de contenu */
+        [data-fr], [data-en] {
+            transition: opacity 0.2s ease;
+        }
+
+        .lang-switching [data-fr], .lang-switching [data-en] {
+            opacity: 0.7;
         }
     </style>
 </head>
@@ -764,9 +806,8 @@
                     Voir LinkedIn
                 </a>
             </div>
+        </div>
     </section>
-
-
 
     <!-- Skills Section -->
     <section class="section reveal">
@@ -805,16 +846,16 @@
                         <div class="experience-date" data-fr="2022 - Présent" data-en="2022 - Present">2022 - Présent</div>
                     </div>
                     <div class="experience-location">Toulouse, France</div>
-                    <div class="experience-description" data-fr="Scale-up logistique e-commerce servant des centaines d'acteurs à forte volumétrie. Développement dans un environnement critique avec milliers d'utilisateurs simultanés." data-en="E-commerce logistics scale-up serving hundreds of high-volume players. Development in a critical environment with thousands of simultaneous users.">
-                        Scale-up logistique e-commerce servant des centaines d'acteurs à forte volumétrie. 
-                        Développement dans un environnement critique avec milliers d'utilisateurs simultanés.
+                    <div class="experience-description" data-fr="Scale-up logistique e-commerce avec +3000 utilisateurs simultanés. Développement de fonctionnalités critiques de gestion d'entrepôts et commandes, couplées à des solutions d'automatisation IA et workflows N8N." data-en="E-commerce logistics scale-up with +3000 simultaneous users. Development of critical warehouse and order management features, coupled with AI automation solutions and N8N workflows.">
+                        Scale-up logistique e-commerce avec +3000 utilisateurs simultanés. 
+                        Développement de fonctionnalités critiques de gestion d'entrepôts et commandes, couplées à des solutions d'automatisation IA et workflows N8N.
                     </div>
                     <div class="experience-highlights">
+                        <span class="highlight-tag" data-fr="Gestion Entrepôts" data-en="Warehouse Management">Gestion Entrepôts</span>
+                        <span class="highlight-tag" data-fr="3000+ Utilisateurs" data-en="3000+ Users">3000+ Utilisateurs</span>
+                        <span class="highlight-tag" data-fr="Agents IA" data-en="AI Agents">Agents IA</span>
+                        <span class="highlight-tag" data-fr="Workflows N8N" data-en="N8N Workflows">Workflows N8N</span>
                         <span class="highlight-tag" data-fr="Haute Performance" data-en="High Performance">Haute Performance</span>
-                        <span class="highlight-tag" data-fr="Fonctionnalités IA" data-en="AI Features">Fonctionnalités IA</span>
-                        <span class="highlight-tag" data-fr="Recherche UX" data-en="UX Research">Recherche UX</span>
-                        <span class="highlight-tag" data-fr="Maintenance Production" data-en="Production Maintenance">Maintenance Production</span>
-                        <span class="highlight-tag">Agile</span>
                     </div>
                 </div>
             </div>
@@ -867,7 +908,6 @@
         </div>
     </section>
 
-
     <!-- Sports & Challenges Section -->
     <section class="section reveal">
         <div class="sports-compact">
@@ -882,7 +922,6 @@
             </div>
         </div>
     </section>
-
 
     <!-- Contact Section -->
     <section class="contact-section">
@@ -919,33 +958,35 @@
                     title: "Développeur Fullstack",
                     company: "Shippingbo",
                     dateLocation: "Octobre 2022 - Présent • Toulouse, France",
-                    description: "Chez Shippingbo, scale-up spécialisée dans la logistique e-commerce, j'ai participé au développement et à l'évolution d'une plateforme stratégique utilisée quotidiennement par des centaines d'acteurs logistiques et e-commerçants à forte volumétrie. Dans un environnement à très forte charge avec des milliers d'utilisateurs connectés simultanément, la stabilité et la performance de l'application étaient des enjeux critiques.",
-                    technologies: ["Python", "Ruby on Rails", "AWS", "Ember.js", "Docker", "CircleCI", "Claude", "Bedrock", "Dust", "Unit Tests", "End-to-End Tests"],
+                    description: "Chez Shippingbo, scale-up spécialisée dans la logistique e-commerce, je développe et maintiens des fonctionnalités critiques de gestion d'entrepôts et de traitement de commandes pour plus de 3000 utilisateurs actifs simultanés. En parallèle, je conçois des solutions d'automatisation intelligente avec agents IA et workflows N8N pour optimiser les processus métier.",
+                    technologies: ["Python", "Ruby on Rails", "AWS", "Ember.js", "Docker", "CircleCI", "Claude", "AWS Bedrock", "N8N", "Dust", "OpenAI API", "PostgreSQL", "Redis", "Unit Tests"],
                     achievements: [
-                        "Développement de nouvelles fonctionnalités au cœur du produit impactant des milliers d'utilisateurs",
-                        "Optimisation continue des performances réduisant les temps de réponse de 40%",
-                        "Intégration de fonctionnalités IA avec Claude et AWS Bedrock pour l'automatisation des processus logistiques",
-                        "Refonte d'outils existants basée sur des études UX approfondies",
-                        "Maintenance en production avec 99.9% de disponibilité",
-                        "Collaboration agile avec les équipes produit, support et design"
+                        "Développement et maintenance de modules critiques de gestion d'entrepôts (stock, picking, expéditions) pour 3000+ utilisateurs simultanés",
+                        "Création de systèmes de traitement de commandes haute performance avec gestion des pics de charge (Black Friday, soldes)",
+                        "Conception d'agents IA conversationnels autonomes réduisant les interventions manuelles de 60%",
+                        "Implémentation de workflows N8N complexes automatisant les processus entre 15+ services tiers (transporteurs, ERP, WMS)",
+                        "Optimisation des performances base de données et cache Redis pour maintenir des temps de réponse <200ms",
+                        "Maintenance proactive en production avec monitoring 24/7 et résolution d'incidents critiques",
+                        "Formation des équipes métier aux nouveaux outils d'automatisation et d'IA"
                     ],
-                    context: "Environnement technique exigeant avec forte charge et contraintes de performance pour servir l'écosystème e-commerce français."
+                    context: "Environnement technique exigeant combinant développement de fonctionnalités métier critiques et innovation IA pour une plateforme logistique de référence."
                 },
                 en: {
                     title: "Fullstack Developer",
                     company: "Shippingbo",
                     dateLocation: "October 2022 - Present • Toulouse, France",
-                    description: "At Shippingbo, an e-commerce logistics scale-up, I participated in the development and evolution of a strategic platform used daily by hundreds of logistics players and high-volume e-merchants. In a very high-load environment with thousands of simultaneously connected users, application stability and performance were critical issues.",
-                    technologies: ["Python", "Ruby on Rails", "AWS", "Ember.js", "Docker", "CircleCI", "Claude", "Bedrock", "Dust", "Unit Tests", "End-to-End Tests"],
+                    description: "At Shippingbo, an e-commerce logistics scale-up, I develop and maintain critical warehouse management and order processing features for over 3000 simultaneous active users. In parallel, I design intelligent automation solutions with AI agents and N8N workflows to optimize business processes.",
+                    technologies: ["Python", "Ruby on Rails", "AWS", "Ember.js", "Docker", "CircleCI", "Claude", "AWS Bedrock", "N8N", "Dust", "OpenAI API", "PostgreSQL", "Redis", "Unit Tests"],
                     achievements: [
-                        "Development of new core product features impacting thousands of users",
-                        "Continuous performance optimization reducing response times by 40%",
-                        "Integration of AI features with Claude and AWS Bedrock for logistics process automation",
-                        "Redesign of existing tools based on thorough UX research",
-                        "Production maintenance with 99.9% availability",
-                        "Agile collaboration with product, support and design teams"
+                        "Development and maintenance of critical warehouse management modules (inventory, picking, shipping) for 3000+ simultaneous users",
+                        "Creation of high-performance order processing systems handling traffic spikes (Black Friday, sales periods)",
+                        "Design of autonomous conversational AI agents reducing manual interventions by 60%",
+                        "Implementation of complex N8N workflows automating processes between 15+ third-party services (carriers, ERP, WMS)",
+                        "Database performance optimization and Redis caching to maintain <200ms response times",
+                        "Proactive production maintenance with 24/7 monitoring and critical incident resolution",
+                        "Training business teams on new automation and AI tools"
                     ],
-                    context: "Demanding technical environment with high load and performance constraints to serve the French e-commerce ecosystem."
+                    context: "Demanding technical environment combining critical business feature development and AI innovation for a leading logistics platform."
                 }
             },
             dco2: {
@@ -1091,6 +1132,9 @@
             const langBtn = document.getElementById('langBtn');
             const elements = document.querySelectorAll('[data-fr][data-en]');
             
+            // FIX: Ajouter une classe pour la transition
+            document.body.classList.add('lang-switching');
+            
             if (currentLang === 'fr') {
                 currentLang = 'en';
                 langBtn.innerHTML = '🇫🇷 Français';
@@ -1108,6 +1152,11 @@
                 document.documentElement.lang = 'fr';
                 document.title = 'Jeremy Estienne - Ingénieur Logiciel';
             }
+            
+            // FIX: Retirer la classe après la transition
+            setTimeout(() => {
+                document.body.classList.remove('lang-switching');
+            }, 300);
         }
 
         // Custom cursor
