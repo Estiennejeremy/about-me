@@ -490,6 +490,185 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            backdrop-filter: blur(20px);
+            position: relative;
+            animation: slideInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #fff;
+            font-size: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 0, 0, 0.2);
+            border-color: rgba(255, 0, 0, 0.3);
+            transform: scale(1.1);
+        }
+
+        .modal-header {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .modal-company {
+            font-size: 1.5rem;
+            color: #00ff88;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .modal-date-location {
+            color: #888;
+            font-size: 1rem;
+        }
+
+        .modal-section {
+            margin-bottom: 30px;
+        }
+
+        .modal-section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #00ff88;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-description {
+            color: #ccc;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .modal-tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .modal-tech-item {
+            background: rgba(0, 255, 136, 0.1);
+            color: #00ff88;
+            padding: 8px 12px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 500;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+        }
+
+        .modal-achievements {
+            list-style: none;
+            padding: 0;
+        }
+
+        .modal-achievements li {
+            color: #ccc;
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .modal-achievements li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #00ff88;
+            font-weight: bold;
+        }
+
+        .experience-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 40px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                padding: 30px 20px;
+                margin: 10px;
+            }
+
+            .modal-tech-grid {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            }
+        }
     </style>
 </head>
 <body>
@@ -556,7 +735,7 @@
         <h2 class="section-title" data-fr="Expérience" data-en="Experience">Expérience</h2>
         <div class="experience-timeline">
             <div class="experience-item">
-                <div class="experience-card">
+                <div class="experience-card" onclick="openModal('shippingbo')">
                     <div class="experience-header">
                         <div>
                             <div class="experience-title" data-fr="Développeur Fullstack" data-en="Fullstack Developer">Développeur Fullstack</div>
@@ -580,7 +759,7 @@
             </div>
 
             <div class="experience-item">
-                <div class="experience-card">
+                <div class="experience-card" onclick="openModal('dco2')">
                     <div class="experience-header">
                         <div>
                             <div class="experience-title" data-fr="Développeur Fullstack" data-en="Fullstack Developer">Développeur Fullstack</div>
@@ -603,7 +782,7 @@
             </div>
 
             <div class="experience-item">
-                <div class="experience-card">
+                <div class="experience-card" onclick="openModal('ge')">
                     <div class="experience-header">
                         <div>
                             <div class="experience-title" data-fr="Développeur Fullstack" data-en="Fullstack Developer">Développeur Fullstack</div>
@@ -643,8 +822,192 @@
         </div>
     </section>
 
+    <!-- Modals -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-close" onclick="closeModal()">&times;</div>
+            <div id="modal-body">
+                <!-- Modal content will be dynamically loaded here -->
+            </div>
+        </div>
+    </div>
+
     <script>
         let currentLang = 'fr';
+
+        const modalData = {
+            shippingbo: {
+                fr: {
+                    title: "Développeur Fullstack",
+                    company: "Shippingbo",
+                    dateLocation: "Octobre 2022 - Présent • Toulouse, France",
+                    description: "Chez Shippingbo, scale-up spécialisée dans la logistique e-commerce, j'ai participé au développement et à l'évolution d'une plateforme stratégique utilisée quotidiennement par des centaines d'acteurs logistiques et e-commerçants à forte volumétrie. Dans un environnement à très forte charge avec des milliers d'utilisateurs connectés simultanément, la stabilité et la performance de l'application étaient des enjeux critiques.",
+                    technologies: ["Python", "Ruby on Rails", "AWS", "Ember.js", "Docker", "CircleCI", "Claude", "Bedrock", "Dust", "Unit Tests", "End-to-End Tests"],
+                    achievements: [
+                        "Développement de nouvelles fonctionnalités au cœur du produit impactant des milliers d'utilisateurs",
+                        "Optimisation continue des performances réduisant les temps de réponse de 40%",
+                        "Intégration de fonctionnalités IA avec Claude et AWS Bedrock pour l'automatisation des processus logistiques",
+                        "Refonte d'outils existants basée sur des études UX approfondies",
+                        "Maintenance en production avec 99.9% de disponibilité",
+                        "Collaboration agile avec les équipes produit, support et design"
+                    ],
+                    context: "Environnement technique exigeant avec forte charge et contraintes de performance pour servir l'écosystème e-commerce français."
+                },
+                en: {
+                    title: "Fullstack Developer",
+                    company: "Shippingbo",
+                    dateLocation: "October 2022 - Present • Toulouse, France",
+                    description: "At Shippingbo, an e-commerce logistics scale-up, I participated in the development and evolution of a strategic platform used daily by hundreds of logistics players and high-volume e-merchants. In a very high-load environment with thousands of simultaneously connected users, application stability and performance were critical issues.",
+                    technologies: ["Python", "Ruby on Rails", "AWS", "Ember.js", "Docker", "CircleCI", "Claude", "Bedrock", "Dust", "Unit Tests", "End-to-End Tests"],
+                    achievements: [
+                        "Development of new core product features impacting thousands of users",
+                        "Continuous performance optimization reducing response times by 40%",
+                        "Integration of AI features with Claude and AWS Bedrock for logistics process automation",
+                        "Redesign of existing tools based on thorough UX research",
+                        "Production maintenance with 99.9% availability",
+                        "Agile collaboration with product, support and design teams"
+                    ],
+                    context: "Demanding technical environment with high load and performance constraints to serve the French e-commerce ecosystem."
+                }
+            },
+            dco2: {
+                fr: {
+                    title: "Développeur Fullstack",
+                    company: "DCO2",
+                    dateLocation: "Octobre 2021 - Octobre 2022 • Toulouse, France",
+                    description: "Dans le cadre de cette expérience au sein d'une startup à fort potentiel, j'ai participé au développement complet – de zéro – d'un logiciel de comptabilité carbone destiné aux entreprises industrielles. Le produit a été utilisé par des groupes de premier plan comme Airbus et Daher dans le cadre de leurs engagements environnementaux.",
+                    technologies: ["Python", "Node.js", "React.js", "AWS", "GitHub Actions", "MongoDB", "Unit Tests", "Docker", "REST API", "Chart.js", "Express.js"],
+                    achievements: [
+                        "Création de l'architecture technique complète from scratch",
+                        "Développement d'interfaces intuitives pour utilisateurs non techniques",
+                        "Intégration de calculs complexes d'émissions carbone conformes aux standards internationaux",
+                        "Collaboration étroite avec les équipes produit et clients pour l'ajustement des fonctionnalités",
+                        "Déploiement et mise en production d'une solution conforme aux exigences réglementaires",
+                        "Formation et support des utilisateurs finaux chez les clients grands comptes"
+                    ],
+                    context: "Startup innovante dans le domaine environnemental avec des clients prestigieux de l'aéronautique."
+                },
+                en: {
+                    title: "Fullstack Developer",
+                    company: "DCO2",
+                    dateLocation: "October 2021 - October 2022 • Toulouse, France",
+                    description: "As part of this experience within a high-potential startup, I participated in the complete development – from scratch – of carbon accounting software for industrial companies. The product was used by leading groups like Airbus and Daher as part of their environmental commitments.",
+                    technologies: ["Python", "Node.js", "React.js", "AWS", "GitHub Actions", "MongoDB", "Unit Tests", "Docker", "REST API", "Chart.js", "Express.js"],
+                    achievements: [
+                        "Creation of complete technical architecture from scratch",
+                        "Development of intuitive interfaces for non-technical users",
+                        "Integration of complex carbon emission calculations compliant with international standards",
+                        "Close collaboration with product and client teams for feature adjustments",
+                        "Deployment and production of a solution compliant with regulatory requirements",
+                        "Training and support of end users at enterprise clients"
+                    ],
+                    context: "Innovative startup in the environmental field with prestigious aerospace clients."
+                }
+            },
+            ge: {
+                fr: {
+                    title: "Développeur Fullstack",
+                    company: "General Electric Power",
+                    dateLocation: "Septembre 2018 - Octobre 2021 • Belfort, France",
+                    description: "Au sein de General Electric Power, j'ai contribué au développement de solutions logicielles critiques couvrant l'ensemble du cycle de vie des centrales nucléaires : de leur conception initiale jusqu'au démantèlement, en passant par la maintenance opérationnelle. Un environnement exigeant où chaque ligne de code contribue à la sûreté des installations énergétiques.",
+                    technologies: ["Java", "Spring Boot", "Angular", "Oracle DB", "REST API", "Maven", "Jenkins", "Git", "JUnit", "Hibernate"],
+                    achievements: [
+                        "Participation à la refonte et modernisation d'applications legacy critiques",
+                        "Conception d'interfaces métier robustes pour des utilisateurs techniques spécialisés",
+                        "Gestion de données critiques liées aux opérations de maintenance et de sûreté nucléaire",
+                        "Collaboration avec des experts du nucléaire pour transformer les besoins métiers complexes",
+                        "Développement selon les standards de qualité et sécurité du secteur nucléaire",
+                        "Formation aux procédures de sûreté et conformité réglementaire stricte"
+                    ],
+                    context: "Environnement industriel hautement réglementé avec des exigences de sûreté maximales dans le secteur nucléaire."
+                },
+                en: {
+                    title: "Fullstack Developer",
+                    company: "General Electric Power",
+                    dateLocation: "September 2018 - October 2021 • Belfort, France",
+                    description: "At General Electric Power, I contributed to the development of critical software solutions covering the entire lifecycle of nuclear power plants: from initial design to decommissioning, including operational maintenance. A demanding environment where every line of code contributes to the safety of energy installations.",
+                    technologies: ["Java", "Spring Boot", "Angular", "Oracle DB", "REST API", "Maven", "Jenkins", "Git", "JUnit", "Hibernate"],
+                    achievements: [
+                        "Participation in refactoring and modernization of critical legacy applications",
+                        "Design of robust business interfaces for specialized technical users",
+                        "Management of critical data related to nuclear maintenance and safety operations",
+                        "Collaboration with nuclear experts to transform complex business requirements",
+                        "Development according to nuclear industry quality and safety standards",
+                        "Training in safety procedures and strict regulatory compliance"
+                    ],
+                    context: "Highly regulated industrial environment with maximum safety requirements in the nuclear sector."
+                }
+            }
+        };
+
+        function openModal(experienceId) {
+            const modal = document.getElementById('modal');
+            const modalBody = document.getElementById('modal-body');
+            const data = modalData[experienceId][currentLang];
+            
+            modalBody.innerHTML = `
+                <div class="modal-header">
+                    <div class="modal-title">${data.title}</div>
+                    <div class="modal-company">${data.company}</div>
+                    <div class="modal-date-location">${data.dateLocation}</div>
+                </div>
+                
+                <div class="modal-section">
+                    <div class="modal-section-title">
+                        📝 ${currentLang === 'fr' ? 'Description' : 'Description'}
+                    </div>
+                    <div class="modal-description">${data.description}</div>
+                </div>
+                
+                <div class="modal-section">
+                    <div class="modal-section-title">
+                        💻 ${currentLang === 'fr' ? 'Technologies utilisées' : 'Technologies used'}
+                    </div>
+                    <div class="modal-tech-grid">
+                        ${data.technologies.map(tech => `<div class="modal-tech-item">${tech}</div>`).join('')}
+                    </div>
+                </div>
+                
+                <div class="modal-section">
+                    <div class="modal-section-title">
+                        🎯 ${currentLang === 'fr' ? 'Réalisations clés' : 'Key achievements'}
+                    </div>
+                    <ul class="modal-achievements">
+                        ${data.achievements.map(achievement => `<li>${achievement}</li>`).join('')}
+                    </ul>
+                </div>
+                
+                <div class="modal-section">
+                    <div class="modal-section-title">
+                        🏢 ${currentLang === 'fr' ? 'Contexte' : 'Context'}
+                    </div>
+                    <div class="modal-description">${data.context}</div>
+                </div>
+            `;
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
 
         function toggleLanguage() {
             const langBtn = document.getElementById('langBtn');
