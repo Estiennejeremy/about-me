@@ -19,25 +19,6 @@
             line-height: 1.6;
         }
 
-        .cursor {
-            width: 20px;
-            height: 20px;
-            border: 2px solid #ff6b35;
-            border-radius: 50%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: 9999;
-            transition: all 0.1s ease;
-            mix-blend-mode: difference;
-        }
-
-        .cursor.hover {
-            transform: scale(2);
-            background: rgba(255, 107, 53, 0.2);
-        }
-
         .lang-switch {
             position: fixed;
             top: 30px;
@@ -902,8 +883,6 @@
     </style>
 </head>
 <body>
-    <div class="cursor"></div>
-    
     <button class="lang-switch" onclick="toggleLanguage()" id="langBtn">
         🇬🇧 English
     </button>
@@ -1334,23 +1313,6 @@
                 document.body.classList.remove('lang-switching');
             }, 300);
         }
-
-        const cursor = document.querySelector('.cursor');
-        const links = document.querySelectorAll('a, .skill-card, .experience-card, .lang-switch');
-
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        });
-
-        links.forEach(link => {
-            link.addEventListener('mouseenter', () => {
-                cursor.classList.add('hover');
-            });
-            link.addEventListener('mouseleave', () => {
-                cursor.classList.remove('hover');
-            });
-        });
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
