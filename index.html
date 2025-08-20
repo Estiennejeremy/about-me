@@ -1,3 +1,8 @@
+/* Clean floating elements - Removed */
+
+        /* Hero exploration elements - Removed */
+    </style>
+</head>
 <body>
     <!-- Starfield -->
     <div class="starfield" id="starfield"></div>
@@ -237,6 +242,31 @@
         <!-- Contact section -->
         <section id="contact" class="contact fade-in">
             <div class="contact-content">
+                <!-- Animated Campfire -->
+                <div class="campfire-container">
+                    <div class="campfire-glow"></div>
+                    <div class="campfire-base"></div>
+                    <div class="campfire-logs">
+                        <div class="log"></div>
+                        <div class="log"></div>
+                        <div class="log"></div>
+                        <div class="log"></div>
+                    </div>
+                    <div class="fire-flame"></div>
+                    <div class="fire-flame"></div>
+                    <div class="fire-flame"></div>
+                    <div class="fire-flame"></div>
+                    <div class="fire-flame"></div>
+                    <div class="fire-sparks">
+                        <div class="spark"></div>
+                        <div class="spark"></div>
+                        <div class="spark"></div>
+                        <div class="spark"></div>
+                        <div class="spark"></div>
+                        <div class="spark"></div>
+                    </div>
+                </div>
+                
                 <h2 class="contact-title" data-fr="Rejoignez l'Expédition" data-en="Join the Expedition">Rejoignez l'Expédition</h2>
                 <p class="contact-description" data-fr="Prêt pour une nouvelle mission ? L'univers du développement regorge de mystères à élucider. Contactez-moi pour explorer ensemble les frontières de la technologie." data-en="Ready for a new mission? The development universe is full of mysteries to solve. Contact me to explore the frontiers of technology together.">
                     Prêt pour une nouvelle mission ? L'univers du développement regorge de mystères à élucider. Contactez-moi pour explorer ensemble les frontières de la technologie.
@@ -1430,11 +1460,262 @@
             box-shadow: 0 0 10px var(--quantum-glow);
         }
 
-        /* Contact section */
+        /* Animated campfire - Outer Wilds style - Larger */
+        .campfire-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 3rem;
+        }
+
+        .campfire-base {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 35px;
+            background: linear-gradient(45deg, #8B4513, #654321);
+            border-radius: 50%;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .campfire-logs {
+            position: absolute;
+            bottom: 15px;
+            left: 32%;
+            transform: translateX(-50%);
+        }
+
+        .log {
+            position: absolute;
+            width: 70px;
+            height: 12px;
+            background: linear-gradient(90deg, #654321, #8B4513, #654321);
+            border-radius: 6px;
+            transform-origin: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .log:nth-child(1) {
+            transform: rotate(15deg) translateX(-15px);
+        }
+
+        .log:nth-child(2) {
+            transform: rotate(-15deg) translateX(15px);
+        }
+
+        .log:nth-child(3) {
+            transform: rotate(45deg) translateY(-6px);
+        }
+
+        .log:nth-child(4) {
+            transform: rotate(-45deg) translateY(-3px);
+            width: 60px;
+            height: 10px;
+        }
+
+        .fire-flame {
+            position: absolute;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 15px;
+            height: 80px;
+            background: linear-gradient(0deg, 
+                var(--accent-orange) 0%, 
+                #ff8c42 30%, 
+                #ffaa00 60%, 
+                #ffdd00 80%,
+                transparent 100%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: flicker 0.6s ease-in-out infinite alternate;
+            filter: blur(0.5px);
+        }
+
+        .fire-flame:nth-child(2) {
+            left: 42%;
+            width: 22px;
+            height: 70px;
+            animation-delay: 0.1s;
+            background: linear-gradient(0deg, 
+                #ff6b35 0%, 
+                var(--accent-orange) 40%, 
+                #ffcc00 70%, 
+                #ffee00 85%,
+                transparent 100%);
+        }
+
+        .fire-flame:nth-child(3) {
+            left: 58%;
+            width: 18px;
+            height: 60px;
+            animation-delay: 0.2s;
+            background: linear-gradient(0deg, 
+                #e55a2b 0%, 
+                #ff8c42 50%, 
+                #ffdd00 75%, 
+                #ffff00 90%,
+                transparent 100%);
+        }
+
+        .fire-flame:nth-child(4) {
+            left: 48%;
+            width: 12px;
+            height: 90px;
+            animation-delay: 0.3s;
+            background: linear-gradient(0deg, 
+                #ff6b35 0%, 
+                #ff8c42 35%, 
+                #ffaa00 65%, 
+                #ffdd00 85%,
+                transparent 100%);
+        }
+
+        .fire-flame:nth-child(5) {
+            left: 52%;
+            width: 14px;
+            height: 75px;
+            animation-delay: 0.4s;
+            background: linear-gradient(0deg, 
+                #e55a2b 0%, 
+                var(--accent-orange) 45%, 
+                #ffcc00 75%, 
+                #ffee00 90%,
+                transparent 100%);
+        }
+
+        .fire-sparks {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .spark {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--accent-orange);
+            border-radius: 50%;
+            animation: sparkRise 3s linear infinite;
+            opacity: 0;
+            box-shadow: 0 0 6px var(--accent-orange);
+        }
+
+        .spark:nth-child(1) {
+            left: 45%;
+            animation-delay: 0s;
+        }
+
+        .spark:nth-child(2) {
+            left: 55%;
+            animation-delay: 0.8s;
+        }
+
+        .spark:nth-child(3) {
+            left: 50%;
+            animation-delay: 1.6s;
+        }
+
+        .spark:nth-child(4) {
+            left: 48%;
+            animation-delay: 2.4s;
+        }
+
+        .spark:nth-child(5) {
+            left: 52%;
+            animation-delay: 0.4s;
+        }
+
+        .spark:nth-child(6) {
+            left: 46%;
+            animation-delay: 1.2s;
+        }
+
+        .campfire-glow {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(circle, 
+                rgba(255, 140, 66, 0.4) 0%, 
+                rgba(255, 140, 66, 0.2) 30%, 
+                rgba(255, 140, 66, 0.1) 50%,
+                transparent 70%);
+            border-radius: 50%;
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes flicker {
+            0% {
+                transform: translateX(-50%) scaleY(1) scaleX(1) rotate(-3deg);
+                opacity: 0.9;
+            }
+            20% {
+                transform: translateX(-50%) scaleY(1.15) scaleX(0.85) rotate(2deg);
+                opacity: 1;
+            }
+            40% {
+                transform: translateX(-50%) scaleY(0.9) scaleX(1.1) rotate(-2deg);
+                opacity: 0.95;
+            }
+            60% {
+                transform: translateX(-50%) scaleY(1.1) scaleX(0.9) rotate(3deg);
+                opacity: 0.9;
+            }
+            80% {
+                transform: translateX(-50%) scaleY(0.95) scaleX(1.05) rotate(-1deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(-50%) scaleY(0.85) scaleX(1.15) rotate(2deg);
+                opacity: 0.95;
+            }
+        }
+
+        @keyframes sparkRise {
+            0% {
+                bottom: 40px;
+                opacity: 1;
+                transform: translateX(0) scale(1);
+            }
+            30% {
+                opacity: 0.9;
+                transform: translateX(15px) scale(0.9);
+            }
+            60% {
+                opacity: 0.6;
+                transform: translateX(-10px) scale(0.7);
+            }
+            100% {
+                bottom: 150px;
+                opacity: 0;
+                transform: translateX(5px) scale(0.2);
+            }
+        }
+
+        @keyframes glow {
+            0% {
+                transform: translateX(-50%) scale(1);
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateX(-50%) scale(1.15);
+                opacity: 0.9;
+            }
+        }
+
+        /* Contact section enhanced */
         .contact {
             text-align: center;
             padding: 6rem 0;
             position: relative;
+            background: radial-gradient(circle at center, rgba(255, 140, 66, 0.05) 0%, transparent 70%);
         }
 
         .contact::before {
@@ -1444,7 +1725,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(circle at center, rgba(255, 140, 66, 0.05) 0%, transparent 70%);
+            background: radial-gradient(circle at center, rgba(255, 140, 66, 0.03) 0%, transparent 50%);
             pointer-events: none;
         }
 
