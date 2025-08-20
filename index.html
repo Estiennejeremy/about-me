@@ -1,1197 +1,26 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jeremy Estienne - Ingénieur Logiciel</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-primary: #0a0a0a;
-            --bg-secondary: #111111;
-            --bg-card: #161616;
-            --text-primary: #ffffff;
-            --text-secondary: #a1a1a1;
-            --text-muted: #666666;
-            --accent: #3b82f6;
-            --accent-hover: #2563eb;
-            --border: #262626;
-            --border-light: #333333;
-        }
+/* Clean floating elements - Removed */
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Header */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: rgba(10, 10, 10, 0.9);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-            padding: 1rem 0;
-            transition: all 0.3s ease;
-        }
-
-        nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-weight: 700;
-            font-size: 1.25rem;
-            color: var(--text-primary);
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 400;
-            transition: color 0.2s ease;
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: var(--text-primary);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: var(--accent);
-            transition: width 0.2s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .lang-toggle {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            color: var(--text-secondary);
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-size: 0.875rem;
-        }
-
-        .lang-toggle:hover {
-            border-color: var(--border-light);
-            color: var(--text-primary);
-        }
-
-        /* Main container */
-        main {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        /* Hero section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 8rem 0 4rem;
-        }
-
-        .hero-content {
-            max-width: 600px;
-        }
-
-        .hero-greeting {
-            color: var(--text-secondary);
-            font-size: 1.125rem;
-            margin-bottom: 1rem;
-            font-weight: 400;
-        }
-
-        .hero-title {
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 700;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            color: var(--text-primary);
-        }
-
-        .hero-subtitle {
-            font-size: 1.25rem;
-            color: var(--accent);
-            font-weight: 500;
-            margin-bottom: 2rem;
-        }
-
-        .hero-description {
-            font-size: 1.125rem;
-            color: var(--text-secondary);
-            line-height: 1.7;
-            margin-bottom: 3rem;
-        }
-
-        .hero-cta {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        /* Buttons */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.875rem 1.5rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.2s ease;
-            cursor: pointer;
-            border: none;
-            font-size: 0.875rem;
-        }
-
-        .btn-primary {
-            background: var(--accent);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: var(--accent-hover);
-            transform: translateY(-1px);
-        }
-
-        .btn-secondary {
-            background: var(--bg-card);
-            color: var(--text-primary);
-            border: 1px solid var(--border);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--border-light);
-            transform: translateY(-1px);
-        }
-
-        /* Sections */
-        section {
-            padding: 6rem 0;
-            border-bottom: 1px solid var(--border);
-        }
-
-        section:last-of-type {
-            border-bottom: none;
-        }
-
-        .section-title {
-            font-size: 2rem;
-            font-weight: 600;
-            margin-bottom: 3rem;
-            color: var(--text-primary);
-        }
-
-        /* About section */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: start;
-            margin-bottom: 4rem;
-        }
-
-        .about-text {
-            font-size: 1.125rem;
-            color: var(--text-secondary);
-            line-height: 1.7;
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-        }
-
-        .about-stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-        }
-
-        .stat {
-            background: var(--bg-card);
-            padding: 2rem;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--accent);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-        }
-
-        /* Skills section */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .skill-category {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 2rem;
-            transition: all 0.2s ease;
-        }
-
-        .skill-category:hover {
-            border-color: var(--border-light);
-            transform: translateY(-2px);
-        }
-
-        .skill-category h3 {
-            color: var(--accent);
-            font-size: 1.125rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .skill-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .skill-tag {
-            background: var(--bg-secondary);
-            color: var(--text-secondary);
-            padding: 0.375rem 0.75rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            border: 1px solid var(--border);
-        }
-
-        /* Experience section */
-        .experience-item {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 2rem;
-            margin-bottom: 1.5rem;
-            transition: all 0.2s ease;
-            cursor: pointer;
-        }
-
-        .experience-item:hover {
-            border-color: var(--border-light);
-            transform: translateY(-2px);
-        }
-
-        .experience-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .experience-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 0.25rem;
-        }
-
-        .experience-company {
-            color: var(--accent);
-            font-weight: 500;
-        }
-
-        .experience-date {
-            color: var(--text-muted);
-            font-size: 0.875rem;
-            background: var(--bg-secondary);
-            padding: 0.375rem 0.75rem;
-            border-radius: 4px;
-            border: 1px solid var(--border);
-        }
-
-        .experience-description {
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
-
-        .experience-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .experience-tag {
-            background: var(--bg-secondary);
-            color: var(--text-secondary);
-            padding: 0.25rem 0.75rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            border: 1px solid var(--border);
-        }
-
-        /* Contact section */
-        .contact {
-            text-align: center;
-            padding: 4rem 0;
-        }
-
-        .contact-content {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .contact-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .contact-description {
-            color: var(--text-secondary);
-            font-size: 1.125rem;
-            margin-bottom: 2rem;
-        }
-
-        .contact-links {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        /* Footer */
-        footer {
-            border-top: 1px solid var(--border);
-            padding: 2rem 0;
-            text-align: center;
-            color: var(--text-muted);
-        }
-
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(4px);
-            z-index: 10000;
-            padding: 2rem;
-        }
-
-        .modal.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 2rem;
-            max-width: 700px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            position: relative;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            width: 32px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: var(--text-secondary);
-            transition: all 0.2s ease;
-        }
-
-        .modal-close:hover {
-            background: var(--border);
-            color: var(--text-primary);
-        }
-
-        .modal-header {
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .modal-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .modal-company {
-            color: var(--accent);
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-        }
-
-        .modal-meta {
-            color: var(--text-muted);
-            font-size: 0.875rem;
-        }
-
-        .modal-section {
-            margin-bottom: 2rem;
-        }
-
-        .modal-section-title {
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: var(--accent);
-            margin-bottom: 1rem;
-        }
-
-        .modal-description {
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
-
-        .modal-tech-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .modal-tech-item {
-            background: var(--bg-secondary);
-            color: var(--text-secondary);
-            padding: 0.5rem;
-            border-radius: 4px;
-            text-align: center;
-            font-size: 0.75rem;
-            border: 1px solid var(--border);
-        }
-
-        .modal-achievements {
-            list-style: none;
-        }
-
-        .modal-achievements li {
-            color: var(--text-secondary);
-            margin-bottom: 0.75rem;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .modal-achievements li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-            font-weight: bold;
-        }
-
-        /* Responsive design */
-        @media (max-width: 768px) {
-            nav {
-                padding: 0 1rem;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            main {
-                padding: 0 1rem;
-            }
-
-            .hero {
-                padding: 6rem 0 2rem;
-            }
-
-            .about-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .about-stats {
-                grid-template-columns: 1fr;
-            }
-
-            .experience-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .modal {
-                padding: 1rem;
-            }
-
-            .modal-content {
-                padding: 1.5rem;
-            }
-
-            /* Reduce particle complexity on mobile */
-            .particle:nth-child(n+5) {
-                display: none;
-            }
-
-            .motion-line:nth-child(n+4) {
-                display: none;
-            }
-
-            .orb:nth-child(n+3) {
-                display: none;
-            }
-
-            .floating-element {
-                font-size: 2rem;
-            }
-        }
-
-        /* Animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Animated particles background */
-        .particles-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -2;
-            overflow: hidden;
-        }
-
-        .particle {
-            position: absolute;
-            background: linear-gradient(45deg, var(--accent), rgba(59, 130, 246, 0.3));
-            border-radius: 50%;
-            animation: particleMove 20s linear infinite;
-            opacity: 0.1;
-        }
-
-        .particle::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 200%;
-            height: 200%;
-            background: inherit;
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            filter: blur(10px);
-            opacity: 0.3;
-        }
-
-        .particle:nth-child(1) {
-            width: 4px;
-            height: 4px;
-            top: 20%;
-            left: -5%;
-            animation-duration: 25s;
-            animation-delay: 0s;
-        }
-
-        .particle:nth-child(2) {
-            width: 6px;
-            height: 6px;
-            top: 60%;
-            left: -5%;
-            animation-duration: 30s;
-            animation-delay: 5s;
-        }
-
-        .particle:nth-child(3) {
-            width: 3px;
-            height: 3px;
-            top: 80%;
-            left: -5%;
-            animation-duration: 35s;
-            animation-delay: 10s;
-        }
-
-        .particle:nth-child(4) {
-            width: 5px;
-            height: 5px;
-            top: 10%;
-            left: -5%;
-            animation-duration: 28s;
-            animation-delay: 15s;
-        }
-
-        .particle:nth-child(5) {
-            width: 8px;
-            height: 8px;
-            top: 40%;
-            left: -5%;
-            animation-duration: 22s;
-            animation-delay: 8s;
-        }
-
-        .particle:nth-child(6) {
-            width: 4px;
-            height: 4px;
-            top: 30%;
-            left: -5%;
-            animation-duration: 33s;
-            animation-delay: 12s;
-        }
-
-        .particle:nth-child(7) {
-            width: 6px;
-            height: 6px;
-            top: 70%;
-            left: -5%;
-            animation-duration: 27s;
-            animation-delay: 18s;
-        }
-
-        .particle:nth-child(8) {
-            width: 3px;
-            height: 3px;
-            top: 50%;
-            left: -5%;
-            animation-duration: 31s;
-            animation-delay: 3s;
-        }
-
-        @keyframes particleMove {
-            0% {
-                transform: translateX(0) translateY(0) scale(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.1;
-                transform: translateX(10vw) translateY(-10vh) scale(1);
-            }
-            20% {
-                opacity: 0.2;
-                transform: translateX(20vw) translateY(10vh) scale(1.2);
-            }
-            30% {
-                opacity: 0.15;
-                transform: translateX(30vw) translateY(-5vh) scale(0.8);
-            }
-            40% {
-                opacity: 0.25;
-                transform: translateX(40vw) translateY(15vh) scale(1.5);
-            }
-            50% {
-                opacity: 0.2;
-                transform: translateX(50vw) translateY(-20vh) scale(1);
-            }
-            60% {
-                opacity: 0.3;
-                transform: translateX(60vw) translateY(5vh) scale(1.3);
-            }
-            70% {
-                opacity: 0.15;
-                transform: translateX(70vw) translateY(-15vh) scale(0.9);
-            }
-            80% {
-                opacity: 0.25;
-                transform: translateX(80vw) translateY(20vh) scale(1.1);
-            }
-            90% {
-                opacity: 0.1;
-                transform: translateX(90vw) translateY(-10vh) scale(1.4);
-            }
-            100% {
-                transform: translateX(105vw) translateY(0) scale(0);
-                opacity: 0;
-            }
-        }
-
-        /* Motion blur lines */
-        .motion-lines {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        .motion-line {
-            position: absolute;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-            animation: lineMove 15s linear infinite;
-            opacity: 0.1;
-        }
-
-        .motion-line:nth-child(1) {
-            top: 20%;
-            width: 200px;
-            animation-delay: 0s;
-            animation-duration: 18s;
-        }
-
-        .motion-line:nth-child(2) {
-            top: 45%;
-            width: 150px;
-            animation-delay: 3s;
-            animation-duration: 22s;
-        }
-
-        .motion-line:nth-child(3) {
-            top: 70%;
-            width: 300px;
-            animation-delay: 6s;
-            animation-duration: 16s;
-        }
-
-        .motion-line:nth-child(4) {
-            top: 85%;
-            width: 180px;
-            animation-delay: 9s;
-            animation-duration: 20s;
-        }
-
-        .motion-line:nth-child(5) {
-            top: 35%;
-            width: 250px;
-            animation-delay: 12s;
-            animation-duration: 19s;
-        }
-
-        @keyframes lineMove {
-            0% {
-                left: -300px;
-                opacity: 0;
-            }
-            20% {
-                opacity: 0.1;
-            }
-            80% {
-                opacity: 0.1;
-            }
-            100% {
-                left: calc(100vw + 100px);
-                opacity: 0;
-            }
-        }
-
-        /* Gradient orbs */
-        .gradient-orbs {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -3;
-        }
-
-        .orb {
-            position: absolute;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
-            animation: orbFloat 25s ease-in-out infinite;
-        }
-
-        .orb:nth-child(1) {
-            width: 400px;
-            height: 400px;
-            top: -200px;
-            left: -200px;
-            animation-delay: 0s;
-        }
-
-        .orb:nth-child(2) {
-            width: 300px;
-            height: 300px;
-            top: 60%;
-            right: -150px;
-            animation-delay: 8s;
-        }
-
-        .orb:nth-child(3) {
-            width: 500px;
-            height: 500px;
-            bottom: -250px;
-            left: 50%;
-            animation-delay: 16s;
-        }
-
-        @keyframes orbFloat {
-            0%, 100% {
-                transform: translate(0, 0) scale(1);
-                opacity: 0.05;
-            }
-            33% {
-                transform: translate(50px, -30px) scale(1.1);
-                opacity: 0.08;
-            }
-            66% {
-                transform: translate(-30px, 40px) scale(0.9);
-                opacity: 0.1;
-            }
-        }
-
-        /* Enhanced hero section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 8rem 0 4rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 30% 20%, rgba(59, 130, 246, 0.03) 0%, transparent 50%);
-            pointer-events: none;
-        }
-
-        /* Background exploration elements */
-        .exploration-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        .floating-element {
-            position: absolute;
-            opacity: 0.04;
-            animation: float 20s ease-in-out infinite;
-            filter: blur(0.5px);
-        }
-
-        .floating-element.rocket {
-            top: 10%;
-            left: 15%;
-            font-size: 4rem;
-            animation-delay: 0s;
-        }
-
-        .floating-element.telescope {
-            top: 60%;
-            right: 10%;
-            font-size: 3.5rem;
-            animation-delay: 5s;
-        }
-
-        .floating-element.compass {
-            bottom: 30%;
-            left: 10%;
-            font-size: 3rem;
-            animation-delay: 10s;
-        }
-
-        .floating-element.mountain {
-            top: 40%;
-            left: 50%;
-            font-size: 5rem;
-            animation-delay: 15s;
-        }
-
-        .floating-element.planet {
-            bottom: 60%;
-            right: 20%;
-            font-size: 2.5rem;
-            animation-delay: 8s;
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0px) rotate(0deg);
-                opacity: 0.04;
-            }
-            25% {
-                transform: translateY(-20px) rotate(90deg);
-                opacity: 0.08;
-            }
-            50% {
-                transform: translateY(-10px) rotate(180deg);
-                opacity: 0.06;
-            }
-            75% {
-                transform: translateY(-30px) rotate(270deg);
-                opacity: 0.07;
-            }
-        }
-
-        /* Hero section exploration elements */
-        .hero-exploration {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-        }
-
-        .exploration-icon {
-            position: absolute;
-            font-size: 2rem;
-            opacity: 0.1;
-            animation: explore 15s ease-in-out infinite;
-        }
-
-        .exploration-icon.map {
-            top: 20%;
-            right: 20%;
-            animation-delay: 0s;
-        }
-
-        .exploration-icon.binoculars {
-            bottom: 30%;
-            right: 15%;
-            animation-delay: 3s;
-        }
-
-        .exploration-icon.flag {
-            top: 50%;
-            left: 80%;
-            animation-delay: 6s;
-        }
-
-        @keyframes explore {
-            0%, 100% {
-                transform: translate(0, 0) scale(1);
-                opacity: 0.1;
-            }
-            50% {
-                transform: translate(-20px, -15px) scale(1.1);
-                opacity: 0.2;
-            }
-        }
-
-        /* Skills section with exploration theme */
-        .skill-category {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 2rem;
-            transition: all 0.2s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .skill-category::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.03) 0%, transparent 70%);
-            transform: scale(0);
-            transition: transform 0.4s ease;
-        }
-
-        .skill-category:hover::before {
-            transform: scale(1);
-        }
-
-        .skill-category:hover {
-            border-color: var(--border-light);
-            transform: translateY(-2px);
-        }
-
-        .skill-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            display: block;
-            text-align: center;
-            filter: grayscale(50%);
-            transition: all 0.3s ease;
-        }
-
-        .skill-category:hover .skill-icon {
-            filter: grayscale(0%);
-            transform: scale(1.1);
-        }
-
-        /* About section with exploration visual */
-        .about-visual {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 300px;
-        }
-
-        .exploration-graphic {
-            font-size: 8rem;
-            opacity: 0.1;
-            position: relative;
-        }
-
-        .exploration-points {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .point {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background: var(--accent);
-            border-radius: 50%;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        .point:nth-child(1) {
-            top: 20%;
-            left: 30%;
-            animation-delay: 0s;
-        }
-
-        .point:nth-child(2) {
-            top: 60%;
-            left: 70%;
-            animation-delay: 0.5s;
-        }
-
-        .point:nth-child(3) {
-            bottom: 30%;
-            left: 50%;
-            animation-delay: 1s;
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                opacity: 0.3;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 1;
-                transform: scale(1.5);
-            }
-        }
-
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--bg-secondary);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--border-light);
-            border-radius: 3px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--text-muted);
-        }
+        /* Hero exploration elements - Removed */
     </style>
 </head>
 <body>
-    <!-- Animated particles background -->
-    <div class="particles-container">
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-    </div>
+    <!-- Starfield -->
+    <div class="starfield" id="starfield"></div>
 
-    <!-- Motion blur lines -->
-    <div class="motion-lines">
-        <div class="motion-line"></div>
-        <div class="motion-line"></div>
-        <div class="motion-line"></div>
-        <div class="motion-line"></div>
-        <div class="motion-line"></div>
-    </div>
+    <!-- Quantum Field -->
+    <div class="quantum-field" id="quantumField"></div>
 
-    <!-- Gradient orbs -->
-    <div class="gradient-orbs">
-        <div class="orb"></div>
-        <div class="orb"></div>
-        <div class="orb"></div>
+    <!-- Orbital System -->
+    <div class="orbital-system">
+        <div class="orbit orbit-1">
+            <div class="planet planet-1"></div>
+        </div>
+        <div class="orbit orbit-2">
+            <div class="planet planet-2"></div>
+        </div>
+        <div class="orbit orbit-3">
+            <div class="planet planet-3"></div>
+        </div>
     </div>
 
     <!-- Background exploration elements -->
@@ -1206,17 +35,26 @@
     <!-- Header -->
     <header>
         <nav>
-            <a href="#" class="logo">Jeremy Estienne</a>
+            <a href="#" class="logo">JEREMY.EX</a>
             <ul class="nav-links">
                 <li><a href="#about" data-fr="À propos" data-en="About">À propos</a></li>
                 <li><a href="#skills" data-fr="Compétences" data-en="Skills">Compétences</a></li>
                 <li><a href="#experience" data-fr="Expérience" data-en="Experience">Expérience</a></li>
                 <li><a href="#contact" data-fr="Contact" data-en="Contact">Contact</a></li>
             </ul>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
             <button class="lang-toggle" onclick="toggleLanguage()" id="langBtn">
-                🇬🇧 EN
+                🌐 EN
             </button>
         </nav>
+        <div class="mobile-menu" id="mobileMenu">
+            <ul class="nav-links">
+                <li><a href="#about" data-fr="À propos" data-en="About" onclick="closeMobileMenu()">À propos</a></li>
+                <li><a href="#skills" data-fr="Compétences" data-en="Skills" onclick="closeMobileMenu()">Compétences</a></li>
+                <li><a href="#experience" data-fr="Expérience" data-en="Experience" onclick="closeMobileMenu()">Expérience</a></li>
+                <li><a href="#contact" data-fr="Contact" data-en="Contact" onclick="closeMobileMenu()">Contact</a></li>
+            </ul>
+        </div>
     </header>
 
     <!-- Main content -->
@@ -1224,37 +62,34 @@
         <!-- Hero section -->
         <section class="hero">
             <div class="hero-exploration">
-                <div class="exploration-icon map">🗺️</div>
-                <div class="exploration-icon binoculars">🔍</div>
-                <div class="exploration-icon flag">🏔️</div>
             </div>
             <div class="hero-content fade-in">
-                <div class="hero-greeting" data-fr="Bonjour, je suis" data-en="Hello, I'm">Bonjour, je suis</div>
-                <h1 class="hero-title">Jeremy Estienne</h1>
+                <div class="hero-greeting" data-fr="Développeur Fullstack" data-en="Fullstack Developer">Développeur Fullstack</div>
+                <h1 class="hero-title">Jeremy<br>Estienne</h1>
                 <div class="hero-subtitle" data-fr="Ingénieur Logiciel" data-en="Software Engineer">Ingénieur Logiciel</div>
-                <p class="hero-description" data-fr="Développeur fullstack passionné par la création d'expériences numériques exceptionnelles et l'innovation en intelligence artificielle. Je transforme des idées complexes en solutions élégantes et performantes." data-en="Passionate fullstack developer creating exceptional digital experiences and AI innovation. I transform complex ideas into elegant and performant solutions.">
-                    Développeur fullstack passionné par la création d'expériences numériques exceptionnelles et l'innovation en intelligence artificielle. Je transforme des idées complexes en solutions élégantes et performantes.
+                <p class="hero-description" data-fr="Développeur passionné par la création d'expériences numériques exceptionnelles et l'innovation en intelligence artificielle. Je transforme des idées complexes en solutions élégantes et performantes." data-en="Passionate developer creating exceptional digital experiences and AI innovation. I transform complex ideas into elegant and performant solutions.">
+                    Développeur passionné par la création d'expériences numériques exceptionnelles et l'innovation en intelligence artificielle. Je transforme des idées complexes en solutions élégantes et performantes.
                 </p>
                 <div class="hero-cta">
-                    <a href="#contact" class="btn btn-primary" data-fr="Me contacter" data-en="Get in touch">Me contacter</a>
-                    <a href="#experience" class="btn btn-secondary" data-fr="Voir mon travail" data-en="View my work">Voir mon travail</a>
+                    <a href="#contact" class="btn btn-primary" data-fr="Commencer l'exploration" data-en="Start exploration">Commencer l'exploration</a>
+                    <a href="#experience" class="btn btn-secondary" data-fr="Consulter les missions" data-en="View missions">Consulter les missions</a>
                 </div>
             </div>
         </section>
 
         <!-- About section -->
         <section id="about" class="fade-in">
-            <h2 class="section-title" data-fr="À propos" data-en="About">À propos</h2>
+            <h2 class="section-title" data-fr="Exploration Personnelle" data-en="Personal Exploration">Exploration Personnelle</h2>
             <div class="about-grid">
                 <div class="about-text">
-                    <p data-fr="Avec plus de 6 ans d'expérience dans le développement logiciel, j'ai eu l'opportunité de travailler sur des projets variés allant du nucléaire à la logistique e-commerce." data-en="With over 6 years of experience in software development, I've had the opportunity to work on diverse projects ranging from nuclear to e-commerce logistics.">
-                        Avec plus de 6 ans d'expérience dans le développement logiciel, j'ai eu l'opportunité de travailler sur des projets variés allant du nucléaire à la logistique e-commerce.
+                    <p data-fr="Comme les astronautes d'Outer Wilds explorant des mondes mystérieux, j'ai passé plus de 6 ans à naviguer dans l'univers du développement logiciel, découvrant des technologies fascinantes et résolvant des énigmes complexes." data-en="Like the astronauts of Outer Wilds exploring mysterious worlds, I've spent over 6 years navigating the software development universe, discovering fascinating technologies and solving complex puzzles.">
+                        Comme les astronautes d'Outer Wilds explorant des mondes mystérieux, j'ai passé plus de 6 ans à naviguer dans l'univers du développement logiciel, découvrant des technologies fascinantes et résolvant des énigmes complexes.
                     </p>
-                    <p data-fr="Actuellement chez Shippingbo, je développe des solutions critiques pour plus de 3000 utilisateurs simultanés tout en innovant avec l'intelligence artificielle pour automatiser et optimiser les processus métier." data-en="Currently at Shippingbo, I develop critical solutions for over 3000 simultaneous users while innovating with artificial intelligence to automate and optimize business processes.">
-                        Actuellement chez Shippingbo, je développe des solutions critiques pour plus de 3000 utilisateurs simultanés tout en innovant avec l'intelligence artificielle pour automatiser et optimiser les processus métier.
+                    <p data-fr="Actuellement en mission chez Shippingbo, je pilote des systèmes critiques pour plus de 3000 utilisateurs simultanés, tout en développant des agents IA autonomes qui repoussent les frontières de l'automatisation." data-en="Currently on mission at Shippingbo, I pilot critical systems for over 3000 simultaneous users, while developing autonomous AI agents that push the boundaries of automation.">
+                        Actuellement en mission chez Shippingbo, je pilote des systèmes critiques pour plus de 3000 utilisateurs simultanés, tout en développant des agents IA autonomes qui repoussent les frontières de l'automatisation.
                     </p>
-                    <p data-fr="Passionné de triathlon, cette discipline m'apporte la rigueur et la persévérance nécessaires pour relever les défis techniques les plus complexes." data-en="Passionate about triathlon, this discipline brings me the rigor and perseverance needed to tackle the most complex technical challenges.">
-                        Passionné de triathlon, cette discipline m'apporte la rigueur et la persévérance nécessaires pour relever les défis techniques les plus complexes.
+                    <p data-fr="Le triathlon, ma passion terrestre, forge ma discipline d'explorateur spatial : endurance, persévérance et capacité d'adaptation face aux défis les plus ardus." data-en="Triathlon, my terrestrial passion, forges my space explorer discipline: endurance, perseverance and adaptability in the face of the most challenging obstacles.">
+                        Le triathlon, ma passion terrestre, forge ma discipline d'explorateur spatial : endurance, persévérance et capacité d'adaptation face aux défis les plus ardus.
                     </p>
                 </div>
                 <div class="about-visual">
@@ -1267,33 +102,32 @@
                 </div>
             </div>
             <div class="about-stats">
-                    <div class="stat">
-                        <div class="stat-number">6+</div>
-                        <div class="stat-label" data-fr="Années d'expérience" data-en="Years of experience">Années d'expérience</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">3000+</div>
-                        <div class="stat-label" data-fr="Utilisateurs impactés" data-en="Users impacted">Utilisateurs impactés</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">15+</div>
-                        <div class="stat-label" data-fr="Projets réalisés" data-en="Projects completed">Projets réalisés</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">3</div>
-                        <div class="stat-label" data-fr="Entreprises" data-en="Companies">Entreprises</div>
-                    </div>
+                <div class="stat">
+                    <div class="stat-number">6+</div>
+                    <div class="stat-label" data-fr="Années d'exploration" data-en="Years of exploration">Années d'exploration</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">3000+</div>
+                    <div class="stat-label" data-fr="Utilisateurs connectés" data-en="Connected users">Utilisateurs connectés</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label" data-fr="Missions accomplies" data-en="Missions completed">Missions accomplies</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">∞</div>
+                    <div class="stat-label" data-fr="Boucles temporelles" data-en="Time loops">Boucles temporelles</div>
                 </div>
             </div>
         </section>
 
         <!-- Skills section -->
         <section id="skills" class="fade-in">
-            <h2 class="section-title" data-fr="Compétences" data-en="Skills">Compétences</h2>
+            <h2 class="section-title" data-fr="Outils d'Exploration" data-en="Exploration Tools">Outils d'Exploration</h2>
             <div class="skills-grid">
                 <div class="skill-category">
                     <div class="skill-icon">🔧</div>
-                    <h3 data-fr="Développement Backend" data-en="Backend Development">Développement Backend</h3>
+                    <h3 data-fr="Systèmes de Propulsion" data-en="Propulsion Systems">Systèmes de Propulsion</h3>
                     <div class="skill-list">
                         <span class="skill-tag">Python</span>
                         <span class="skill-tag">Ruby on Rails</span>
@@ -1305,7 +139,7 @@
                 </div>
                 <div class="skill-category">
                     <div class="skill-icon">🎨</div>
-                    <h3 data-fr="Développement Frontend" data-en="Frontend Development">Développement Frontend</h3>
+                    <h3 data-fr="Interface Spatiale" data-en="Spatial Interface">Interface Spatiale</h3>
                     <div class="skill-list">
                         <span class="skill-tag">React.js</span>
                         <span class="skill-tag">Angular</span>
@@ -1317,7 +151,7 @@
                 </div>
                 <div class="skill-category">
                     <div class="skill-icon">🤖</div>
-                    <h3 data-fr="Intelligence Artificielle" data-en="Artificial Intelligence">Intelligence Artificielle</h3>
+                    <h3 data-fr="Intelligence Quantique" data-en="Quantum Intelligence">Intelligence Quantique</h3>
                     <div class="skill-list">
                         <span class="skill-tag">Claude</span>
                         <span class="skill-tag">OpenAI</span>
@@ -1329,7 +163,7 @@
                 </div>
                 <div class="skill-category">
                     <div class="skill-icon">☁️</div>
-                    <h3 data-fr="DevOps & Cloud" data-en="DevOps & Cloud">DevOps & Cloud</h3>
+                    <h3 data-fr="Navigation Cosmique" data-en="Cosmic Navigation">Navigation Cosmique</h3>
                     <div class="skill-list">
                         <span class="skill-tag">AWS</span>
                         <span class="skill-tag">Docker</span>
@@ -1344,25 +178,25 @@
 
         <!-- Experience section -->
         <section id="experience" class="fade-in">
-            <h2 class="section-title" data-fr="Expérience" data-en="Experience">Expérience</h2>
+            <h2 class="section-title" data-fr="Expérience Professionnelle" data-en="Professional Experience">Expérience Professionnelle</h2>
             
             <div class="experience-item" onclick="openModal('shippingbo')">
                 <div class="experience-header">
                     <div>
-                        <div class="experience-title" data-fr="Développeur Fullstack" data-en="Fullstack Developer">Développeur Fullstack</div>
+                        <div class="experience-title" data-fr="Ingénieur Logiciel Senior" data-en="Senior Software Engineer">Ingénieur Logiciel Senior</div>
                         <div class="experience-company">Shippingbo</div>
                     </div>
-                    <div class="experience-date" data-fr="2022 - Présent" data-en="2022 - Present">2022 - Présent</div>
+                    <div class="experience-date" data-fr="Oct. 2022 - Présent" data-en="Oct. 2022 - Present">Oct. 2022 - Présent</div>
                 </div>
-                <div class="experience-description" data-fr="Scale-up logistique e-commerce avec +3000 utilisateurs simultanés. Développement de fonctionnalités critiques et solutions d'automatisation IA." data-en="E-commerce logistics scale-up with +3000 simultaneous users. Development of critical features and AI automation solutions.">
-                    Scale-up logistique e-commerce avec +3000 utilisateurs simultanés. Développement de fonctionnalités critiques et solutions d'automatisation IA.
+                <div class="experience-description" data-fr="Développement et maintenance d'une plateforme logistique e-commerce critique supportant plus de 3000 utilisateurs simultanés. Conception et implémentation de solutions d'automatisation IA pour l'optimisation des processus métier et l'intégration de services tiers." data-en="Development and maintenance of a critical e-commerce logistics platform supporting over 3000 simultaneous users. Design and implementation of AI automation solutions for business process optimization and third-party service integration.">
+                    Développement et maintenance d'une plateforme logistique e-commerce critique supportant plus de 3000 utilisateurs simultanés. Conception et implémentation de solutions d'automatisation IA pour l'optimisation des processus métier et l'intégration de services tiers.
                 </div>
                 <div class="experience-tags">
                     <span class="experience-tag">Python</span>
                     <span class="experience-tag">Ruby on Rails</span>
                     <span class="experience-tag">AWS</span>
-                    <span class="experience-tag">Agents IA</span>
-                    <span class="experience-tag">N8N</span>
+                    <span class="experience-tag">Intelligence Artificielle</span>
+                    <span class="experience-tag">Architecture Microservices</span>
                 </div>
             </div>
 
@@ -1374,33 +208,33 @@
                     </div>
                     <div class="experience-date">2021 - 2022</div>
                 </div>
-                <div class="experience-description" data-fr="Création complète d'une plateforme de comptabilité carbone utilisée par Airbus et Daher." data-en="Complete creation of a carbon accounting platform used by Airbus and Daher.">
-                    Création complète d'une plateforme de comptabilité carbone utilisée par Airbus et Daher.
+                <div class="experience-description" data-fr="Développement from scratch d'une solution SaaS de comptabilité carbone pour entreprises industrielles. Architecture complète d'une plateforme utilisée par des groupes internationaux comme Airbus et Daher pour le suivi de leurs émissions et engagements environnementaux." data-en="From-scratch development of a SaaS carbon accounting solution for industrial companies. Complete architecture of a platform used by international groups like Airbus and Daher for tracking their emissions and environmental commitments.">
+                    Développement from scratch d'une solution SaaS de comptabilité carbone pour entreprises industrielles. Architecture complète d'une plateforme utilisée par des groupes internationaux comme Airbus et Daher pour le suivi de leurs émissions et engagements environnementaux.
                 </div>
                 <div class="experience-tags">
                     <span class="experience-tag">Python</span>
                     <span class="experience-tag">React.js</span>
                     <span class="experience-tag">MongoDB</span>
-                    <span class="experience-tag">AWS</span>
+                    <span class="experience-tag">Architecture Cloud</span>
                 </div>
             </div>
 
             <div class="experience-item" onclick="openModal('ge')">
                 <div class="experience-header">
                     <div>
-                        <div class="experience-title" data-fr="Développeur Fullstack" data-en="Fullstack Developer">Développeur Fullstack</div>
+                        <div class="experience-title" data-fr="Ingénieur Logiciel" data-en="Software Engineer">Ingénieur Logiciel</div>
                         <div class="experience-company">General Electric Power</div>
                     </div>
                     <div class="experience-date">2018 - 2021</div>
                 </div>
-                <div class="experience-description" data-fr="Solutions logicielles critiques pour le cycle de vie complet des centrales nucléaires." data-en="Critical software solutions for the complete lifecycle of nuclear power plants.">
-                    Solutions logicielles critiques pour le cycle de vie complet des centrales nucléaires.
+                <div class="experience-description" data-fr="Développement de solutions logicielles critiques pour l'industrie nucléaire. Conception et maintenance d'applications couvrant l'ensemble du cycle de vie des centrales nucléaires, de la conception initiale au démantèlement, avec un focus sur la sûreté et la conformité réglementaire." data-en="Development of critical software solutions for the nuclear industry. Design and maintenance of applications covering the complete lifecycle of nuclear power plants, from initial design to decommissioning, with a focus on safety and regulatory compliance.">
+                    Développement de solutions logicielles critiques pour l'industrie nucléaire. Conception et maintenance d'applications couvrant l'ensemble du cycle de vie des centrales nucléaires, de la conception initiale au démantèlement, avec un focus sur la sûreté et la conformité réglementaire.
                 </div>
                 <div class="experience-tags">
                     <span class="experience-tag">Java</span>
                     <span class="experience-tag">Angular</span>
-                    <span class="experience-tag">Oracle DB</span>
-                    <span class="experience-tag">Spring Boot</span>
+                    <span class="experience-tag">Oracle Database</span>
+                    <span class="experience-tag">Sécurité Critique</span>
                 </div>
             </div>
         </section>
@@ -1408,9 +242,9 @@
         <!-- Contact section -->
         <section id="contact" class="contact fade-in">
             <div class="contact-content">
-                <h2 class="contact-title" data-fr="Travaillons ensemble" data-en="Let's work together">Travaillons ensemble</h2>
-                <p class="contact-description" data-fr="Vous avez un projet en tête ? N'hésitez pas à me contacter pour discuter de vos besoins." data-en="Have a project in mind? Feel free to contact me to discuss your needs.">
-                    Vous avez un projet en tête ? N'hésitez pas à me contacter pour discuter de vos besoins.
+                <h2 class="contact-title" data-fr="Rejoignez l'Expédition" data-en="Join the Expedition">Rejoignez l'Expédition</h2>
+                <p class="contact-description" data-fr="Prêt pour une nouvelle mission ? L'univers du développement regorge de mystères à élucider. Contactez-moi pour explorer ensemble les frontières de la technologie." data-en="Ready for a new mission? The development universe is full of mysteries to solve. Contact me to explore the frontiers of technology together.">
+                    Prêt pour une nouvelle mission ? L'univers du développement regorge de mystères à élucider. Contactez-moi pour explorer ensemble les frontières de la technologie.
                 </p>
                 <div class="contact-links">
                     <a href="https://www.linkedin.com/in/jeremy-estienne" class="btn btn-primary" target="_blank">
@@ -1427,7 +261,7 @@
     <!-- Footer -->
     <footer>
         <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
-            <p data-fr="© 2024 Jeremy Estienne. Tous droits réservés." data-en="© 2024 Jeremy Estienne. All rights reserved.">© 2024 Jeremy Estienne. Tous droits réservés.</p>
+            <p data-fr="© 2024 Jeremy Estienne - Explorateur de l'Inconnu Numérique" data-en="© 2024 Jeremy Estienne - Digital Unknown Explorer">© 2024 Jeremy Estienne - Explorateur de l'Inconnu Numérique</p>
         </div>
     </footer>
 
@@ -1447,35 +281,35 @@
         const modalData = {
             shippingbo: {
                 fr: {
-                    title: "Développeur Fullstack",
+                    title: "Ingénieur Logiciel Senior",
                     company: "Shippingbo",
                     meta: "Octobre 2022 - Présent • Toulouse, France",
-                    description: "Chez Shippingbo, scale-up spécialisée dans la logistique e-commerce, je développe et maintiens des fonctionnalités critiques de gestion d'entrepôts et de traitement de commandes pour plus de 3000 utilisateurs actifs simultanés. En parallèle, je conçois des solutions d'automatisation intelligente avec agents IA et workflows N8N pour optimiser les processus métier.",
+                    description: "En tant qu'Ingénieur Logiciel Senior chez Shippingbo, scale-up spécialisée dans la logistique e-commerce, je dirige le développement et la maintenance de fonctionnalités critiques de gestion d'entrepôts et de traitement de commandes pour une plateforme supportant plus de 3000 utilisateurs actifs simultanés. En parallèle, je conçois et implémente des solutions d'automatisation intelligente utilisant des agents IA conversationnels et des workflows N8N pour optimiser les processus métier et réduire significativement les interventions manuelles.",
                     technologies: ["Python", "Ruby on Rails", "AWS", "Ember.js", "Docker", "CircleCI", "Claude", "AWS Bedrock", "N8N", "Dust", "OpenAI API", "PostgreSQL", "Redis", "Unit Tests"],
                     achievements: [
-                        "Développement et maintenance de modules critiques de gestion d'entrepôts pour 3000+ utilisateurs simultanés",
-                        "Création de systèmes de traitement de commandes haute performance avec gestion des pics de charge",
-                        "Conception d'agents IA conversationnels autonomes réduisant les interventions manuelles de 60%",
-                        "Implémentation de workflows N8N complexes automatisant les processus entre 15+ services tiers",
-                        "Optimisation des performances base de données et cache Redis pour maintenir des temps de réponse <200ms",
-                        "Maintenance proactive en production avec monitoring 24/7 et résolution d'incidents critiques",
-                        "Formation des équipes métier aux nouveaux outils d'automatisation et d'IA"
+                        "Développement et maintenance de modules critiques de gestion d'entrepôts (stock, picking, expéditions) pour 3000+ utilisateurs simultanés",
+                        "Conception de systèmes de traitement de commandes haute performance avec gestion automatique des pics de charge (Black Friday, soldes)",
+                        "Implémentation d'agents IA conversationnels autonomes réduisant les interventions manuelles de 60%",
+                        "Architecture et déploiement de workflows N8N complexes automatisant les processus entre 15+ services tiers (transporteurs, ERP, WMS)",
+                        "Optimisation des performances de base de données et mise en place de cache Redis maintenant des temps de réponse <200ms",
+                        "Mise en place de monitoring 24/7 et résolution proactive d'incidents critiques en production",
+                        "Formation et accompagnement des équipes métier sur les nouveaux outils d'automatisation et d'IA"
                     ]
                 },
                 en: {
-                    title: "Fullstack Developer",
+                    title: "Senior Software Engineer",
                     company: "Shippingbo",
                     meta: "October 2022 - Present • Toulouse, France",
-                    description: "At Shippingbo, an e-commerce logistics scale-up, I develop and maintain critical warehouse management and order processing features for over 3000 simultaneous active users. In parallel, I design intelligent automation solutions with AI agents and N8N workflows to optimize business processes.",
+                    description: "As Senior Software Engineer at Shippingbo, an e-commerce logistics scale-up, I lead the development and maintenance of critical warehouse management and order processing features for a platform supporting over 3000 simultaneous active users. In parallel, I design and implement intelligent automation solutions using conversational AI agents and N8N workflows to optimize business processes and significantly reduce manual interventions.",
                     technologies: ["Python", "Ruby on Rails", "AWS", "Ember.js", "Docker", "CircleCI", "Claude", "AWS Bedrock", "N8N", "Dust", "OpenAI API", "PostgreSQL", "Redis", "Unit Tests"],
                     achievements: [
-                        "Development and maintenance of critical warehouse management modules for 3000+ simultaneous users",
-                        "Creation of high-performance order processing systems handling traffic spikes",
-                        "Design of autonomous conversational AI agents reducing manual interventions by 60%",
-                        "Implementation of complex N8N workflows automating processes between 15+ third-party services",
-                        "Database performance optimization and Redis caching to maintain <200ms response times",
-                        "Proactive production maintenance with 24/7 monitoring and critical incident resolution",
-                        "Training business teams on new automation and AI tools"
+                        "Development and maintenance of critical warehouse management modules (inventory, picking, shipping) for 3000+ simultaneous users",
+                        "Design of high-performance order processing systems with automatic handling of traffic spikes (Black Friday, sales periods)",
+                        "Implementation of autonomous conversational AI agents reducing manual interventions by 60%",
+                        "Architecture and deployment of complex N8N workflows automating processes between 15+ third-party services (carriers, ERP, WMS)",
+                        "Database performance optimization and Redis caching implementation maintaining <200ms response times",
+                        "Implementation of 24/7 monitoring and proactive resolution of critical production incidents",
+                        "Training and support of business teams on new automation and AI tools"
                     ]
                 }
             },
@@ -1484,66 +318,114 @@
                     title: "Développeur Fullstack",
                     company: "DCO2",
                     meta: "Octobre 2021 - Octobre 2022 • Toulouse, France",
-                    description: "Dans le cadre de cette expérience au sein d'une startup à fort potentiel, j'ai participé au développement complet – de zéro – d'un logiciel de comptabilité carbone destiné aux entreprises industrielles. Le produit a été utilisé par des groupes de premier plan comme Airbus et Daher dans le cadre de leurs engagements environnementaux.",
+                    description: "Au sein de DCO2, startup innovante dans le domaine environnemental, j'ai dirigé le développement complet d'une solution SaaS de comptabilité carbone destinée aux entreprises industrielles. Cette plateforme, construite from scratch, permet aux organisations de mesurer, analyser et réduire leurs émissions de carbone en conformité avec les standards internationaux. Le produit a été adopté par des groupes de premier plan comme Airbus et Daher dans le cadre de leurs stratégies de développement durable et engagements environnementaux.",
                     technologies: ["Python", "Node.js", "React.js", "AWS", "GitHub Actions", "MongoDB", "Unit Tests", "Docker", "REST API", "Chart.js", "Express.js"],
                     achievements: [
-                        "Création de l'architecture technique complète from scratch",
-                        "Développement d'interfaces intuitives pour utilisateurs non techniques",
-                        "Intégration de calculs complexes d'émissions carbone conformes aux standards internationaux",
-                        "Collaboration étroite avec les équipes produit et clients pour l'ajustement des fonctionnalités",
-                        "Déploiement et mise en production d'une solution conforme aux exigences réglementaires",
-                        "Formation et support des utilisateurs finaux chez les clients grands comptes"
+                        "Architecture et développement complet from scratch d'une solution SaaS de comptabilité carbone",
+                        "Conception d'interfaces utilisateur intuitives permettant aux non-experts de gérer facilement les données d'émissions",
+                        "Intégration de calculs complexes d'émissions carbone conformes aux standards internationaux (GHG Protocol, ISO 14064)",
+                        "Collaboration directe avec les équipes produit et clients grands comptes pour l'ajustement des fonctionnalités métier",
+                        "Déploiement et mise en production d'une solution conforme aux exigences de sécurité et réglementaires strictes",
+                        "Formation et support technique des utilisateurs finaux chez Airbus, Daher et autres clients industriels"
                     ]
                 },
                 en: {
                     title: "Fullstack Developer",
                     company: "DCO2",
                     meta: "October 2021 - October 2022 • Toulouse, France",
-                    description: "As part of this experience within a high-potential startup, I participated in the complete development – from scratch – of carbon accounting software for industrial companies. The product was used by leading groups like Airbus and Daher as part of their environmental commitments.",
+                    description: "At DCO2, an innovative startup in the environmental field, I led the complete development of a SaaS carbon accounting solution for industrial companies. This platform, built from scratch, enables organizations to measure, analyze and reduce their carbon emissions in compliance with international standards. The product was adopted by leading groups like Airbus and Daher as part of their sustainability strategies and environmental commitments.",
                     technologies: ["Python", "Node.js", "React.js", "AWS", "GitHub Actions", "MongoDB", "Unit Tests", "Docker", "REST API", "Chart.js", "Express.js"],
                     achievements: [
-                        "Creation of complete technical architecture from scratch",
-                        "Development of intuitive interfaces for non-technical users",
-                        "Integration of complex carbon emission calculations compliant with international standards",
-                        "Close collaboration with product and client teams for feature adjustments",
-                        "Deployment and production of a solution compliant with regulatory requirements",
-                        "Training and support of end users at enterprise clients"
+                        "Complete architecture and from-scratch development of a SaaS carbon accounting solution",
+                        "Design of intuitive user interfaces enabling non-experts to easily manage emissions data",
+                        "Integration of complex carbon emission calculations compliant with international standards (GHG Protocol, ISO 14064)",
+                        "Direct collaboration with product teams and enterprise clients for business feature adjustments",
+                        "Deployment and production of a solution compliant with strict security and regulatory requirements",
+                        "Technical training and support of end users at Airbus, Daher and other industrial clients"
                     ]
                 }
             },
             ge: {
                 fr: {
-                    title: "Développeur Fullstack",
+                    title: "Ingénieur Logiciel",
                     company: "General Electric Power",
                     meta: "Septembre 2018 - Octobre 2021 • Belfort, France",
-                    description: "Au sein de General Electric Power, j'ai contribué au développement de solutions logicielles critiques couvrant l'ensemble du cycle de vie des centrales nucléaires : de leur conception initiale jusqu'au démantèlement, en passant par la maintenance opérationnelle. Un environnement exigeant où chaque ligne de code contribue à la sûreté des installations énergétiques.",
+                    description: "Au sein de General Electric Power, division nucléaire du groupe GE, j'ai contribué au développement de solutions logicielles critiques pour l'industrie nucléaire civile. Ces applications couvrent l'ensemble du cycle de vie des centrales nucléaires : conception initiale, maintenance opérationnelle, modernisation et démantèlement sécurisé. Dans cet environnement hautement réglementé, chaque développement respecte les standards de qualité et sécurité les plus stricts, contribuant directement à la sûreté des installations énergétiques et à la protection des populations.",
                     technologies: ["Java", "Spring Boot", "Angular", "Oracle DB", "REST API", "Maven", "Jenkins", "Git", "JUnit", "Hibernate"],
                     achievements: [
-                        "Participation à la refonte et modernisation d'applications legacy critiques",
-                        "Conception d'interfaces métier robustes pour des utilisateurs techniques spécialisés",
-                        "Gestion de données critiques liées aux opérations de maintenance et de sûreté nucléaire",
-                        "Collaboration avec des experts du nucléaire pour transformer les besoins métiers complexes",
-                        "Développement selon les standards de qualité et sécurité du secteur nucléaire",
-                        "Formation aux procédures de sûreté et conformité réglementaire stricte"
+                        "Participation active à la refonte et modernisation d'applications legacy critiques pour la sûreté nucléaire",
+                        "Conception d'interfaces métier robustes et ergonomiques pour des utilisateurs techniques hautement spécialisés",
+                        "Développement de modules de gestion de données critiques liées aux opérations de maintenance et de sûreté nucléaire",
+                        "Collaboration étroite avec des experts du nucléaire pour la transformation de besoins métiers complexes en solutions techniques",
+                        "Développement selon les standards de qualité et sécurité les plus stricts du secteur nucléaire civil",
+                        "Formation approfondie aux procédures de sûreté et conformité réglementaire (ASN, IAEA)"
                     ]
                 },
                 en: {
-                    title: "Fullstack Developer",
+                    title: "Software Engineer",
                     company: "General Electric Power",
                     meta: "September 2018 - October 2021 • Belfort, France",
-                    description: "At General Electric Power, I contributed to the development of critical software solutions covering the entire lifecycle of nuclear power plants: from initial design to decommissioning, including operational maintenance. A demanding environment where every line of code contributes to the safety of energy installations.",
+                    description: "At General Electric Power, GE's nuclear division, I contributed to the development of critical software solutions for the civil nuclear industry. These applications cover the entire lifecycle of nuclear power plants: initial design, operational maintenance, modernization and secure decommissioning. In this highly regulated environment, every development adheres to the strictest quality and safety standards, directly contributing to the safety of energy installations and population protection.",
                     technologies: ["Java", "Spring Boot", "Angular", "Oracle DB", "REST API", "Maven", "Jenkins", "Git", "JUnit", "Hibernate"],
                     achievements: [
-                        "Participation in refactoring and modernization of critical legacy applications",
-                        "Design of robust business interfaces for specialized technical users",
-                        "Management of critical data related to nuclear maintenance and safety operations",
-                        "Collaboration with nuclear experts to transform complex business requirements",
-                        "Development according to nuclear industry quality and safety standards",
-                        "Training in safety procedures and strict regulatory compliance"
+                        "Active participation in refactoring and modernization of legacy applications critical to nuclear safety",
+                        "Design of robust and ergonomic business interfaces for highly specialized technical users",
+                        "Development of critical data management modules related to nuclear maintenance and safety operations",
+                        "Close collaboration with nuclear experts for transforming complex business requirements into technical solutions",
+                        "Development according to the strictest quality and safety standards of the civil nuclear sector",
+                        "Comprehensive training in safety procedures and regulatory compliance (ASN, IAEA)"
                     ]
                 }
             }
         };
+
+        // Create starfield
+        function createStarfield() {
+            const starfield = document.getElementById('starfield');
+            const numStars = 200;
+            
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                // Random size
+                const size = Math.random();
+                if (size < 0.7) star.classList.add('small');
+                else if (size < 0.9) star.classList.add('medium');
+                else star.classList.add('large');
+                
+                // Random position
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                
+                // Random animation delay
+                star.style.animationDelay = Math.random() * 3 + 's';
+                
+                starfield.appendChild(star);
+            }
+        }
+
+        // Create quantum particles
+        function createQuantumField() {
+            const quantumField = document.getElementById('quantumField');
+            const numParticles = 15;
+            
+            for (let i = 0; i < numParticles; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'quantum-particle';
+                
+                // Random horizontal position
+                particle.style.left = Math.random() * 100 + '%';
+                
+                // Random animation delay
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                
+                // Random animation duration
+                particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+                
+                quantumField.appendChild(particle);
+            }
+        }
 
         function openModal(experienceId) {
             const modal = document.getElementById('modal');
@@ -1558,19 +440,19 @@
                 </div>
                 
                 <div class="modal-section">
-                    <div class="modal-section-title">${currentLang === 'fr' ? 'Description' : 'Description'}</div>
+                    <div class="modal-section-title">${currentLang === 'fr' ? 'Rapport de Mission' : 'Mission Report'}</div>
                     <div class="modal-description">${data.description}</div>
                 </div>
                 
                 <div class="modal-section">
-                    <div class="modal-section-title">${currentLang === 'fr' ? 'Technologies utilisées' : 'Technologies used'}</div>
+                    <div class="modal-section-title">${currentLang === 'fr' ? 'Technologies Utilisées' : 'Technologies Used'}</div>
                     <div class="modal-tech-grid">
                         ${data.technologies.map(tech => `<div class="modal-tech-item">${tech}</div>`).join('')}
                     </div>
                 </div>
                 
                 <div class="modal-section">
-                    <div class="modal-section-title">${currentLang === 'fr' ? 'Réalisations clés' : 'Key achievements'}</div>
+                    <div class="modal-section-title">${currentLang === 'fr' ? 'Réalisations Clés' : 'Key Achievements'}</div>
                     <ul class="modal-achievements">
                         ${data.achievements.map(achievement => `<li>${achievement}</li>`).join('')}
                     </ul>
@@ -1601,26 +483,37 @@
             }
         });
 
+        // Mobile menu functions
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('active');
+        }
+
+        function closeMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.remove('active');
+        }
+
         function toggleLanguage() {
             const langBtn = document.getElementById('langBtn');
             const elements = document.querySelectorAll('[data-fr][data-en]');
             
             if (currentLang === 'fr') {
                 currentLang = 'en';
-                langBtn.innerHTML = '🇫🇷 FR';
+                langBtn.innerHTML = '🌐 FR';
                 elements.forEach(el => {
                     el.textContent = el.getAttribute('data-en');
                 });
                 document.documentElement.lang = 'en';
-                document.title = 'Jeremy Estienne - Software Engineer';
+                document.title = 'Jeremy Estienne - Code Explorer';
             } else {
                 currentLang = 'fr';
-                langBtn.innerHTML = '🇬🇧 EN';
+                langBtn.innerHTML = '🌐 EN';
                 elements.forEach(el => {
                     el.textContent = el.getAttribute('data-fr');
                 });
                 document.documentElement.lang = 'fr';
-                document.title = 'Jeremy Estienne - Ingénieur Logiciel';
+                document.title = 'Jeremy Estienne - Explorateur du Code';
             }
         }
 
@@ -1655,6 +548,9 @@
                         top: targetPosition,
                         behavior: 'smooth'
                     });
+                    
+                    // Close mobile menu if open
+                    closeMobileMenu();
                 }
             });
         });
@@ -1666,6 +562,9 @@
         window.addEventListener('scroll', () => {
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             
+            // Close mobile menu on scroll
+            closeMobileMenu();
+            
             if (scrollTop > lastScrollTop && scrollTop > 100) {
                 header.style.transform = 'translateY(-100%)';
             } else {
@@ -1675,10 +574,1243 @@
             lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
         });
 
-        // Initialize animations on page load
+        // Initialize animations and effects on page load
         window.addEventListener('load', () => {
+            createStarfield();
+            createQuantumField();
             document.querySelector('.hero .fade-in').classList.add('visible');
+        });
+
+        // Parallax effect for orbital system
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const orbitalSystem = document.querySelector('.orbital-system');
+            const floatingElements = document.querySelectorAll('.floating-element');
+            
+            // Slow parallax for orbital system
+            if (orbitalSystem) {
+                orbitalSystem.style.transform = `translate(-50%, -50%) rotate(${scrolled * 0.05}deg)`;
+            }
+            
+            // Different speeds for floating elements
+            floatingElements.forEach((element, index) => {
+                const speed = (index + 1) * 0.3;
+                element.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Add cosmic sound effects on interactions (visual feedback only)
+        document.querySelectorAll('.btn, .experience-item, .skill-category').forEach(element => {
+            element.addEventListener('mouseenter', function() {
+                this.style.filter = 'brightness(1.2)';
+            });
+            
+            element.addEventListener('mouseleave', function() {
+                this.style.filter = 'brightness(1)';
+            });
+        });
+
+        // Dynamic quantum particle creation
+        setInterval(() => {
+            const quantumField = document.getElementById('quantumField');
+            if (quantumField && quantumField.children.length < 20) {
+                const particle = document.createElement('div');
+                particle.className = 'quantum-particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+                quantumField.appendChild(particle);
+                
+                // Remove particle after animation
+                setTimeout(() => {
+                    if (particle.parentNode) {
+                        particle.parentNode.removeChild(particle);
+                    }
+                }, 25000);
+            }
+        }, 3000);
+
+        // Add glitch effect on logo hover
+        document.querySelector('.logo').addEventListener('mouseenter', function() {
+            this.style.textShadow = '0 0 20px var(--space-glow), 2px 0 0 #ff8c42, -2px 0 0 #4a90c2';
+        });
+
+        document.querySelector('.logo').addEventListener('mouseleave', function() {
+            this.style.textShadow = '0 0 10px var(--space-glow)';
         });
     </script>
 </body>
-</html>
+</html><!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeremy Estienne - Explorateur du Code</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0d0f1a;
+            --bg-secondary: #1a1d2e;
+            --bg-card: #252a3f;
+            --text-primary: #e8e6d3;
+            --text-secondary: #b8b5a1;
+            --text-muted: #6b6853;
+            --accent-orange: #ff8c42;
+            --accent-blue: #4a90c2;
+            --accent-green: #7cb342;
+            --accent-purple: #9c63c4;
+            --border: #3a3f52;
+            --space-glow: rgba(255, 140, 66, 0.3);
+            --quantum-glow: rgba(74, 144, 194, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Space Mono', monospace;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Starfield background */
+        .starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -10;
+            background: radial-gradient(ellipse at bottom, #1a1d2e 0%, #0d0f1a 100%);
+        }
+
+        .star {
+            position: absolute;
+            background: #e8e6d3;
+            border-radius: 50%;
+            animation: twinkle 3s ease-in-out infinite alternate;
+        }
+
+        .star.small {
+            width: 1px;
+            height: 1px;
+        }
+
+        .star.medium {
+            width: 2px;
+            height: 2px;
+            box-shadow: 0 0 6px rgba(232, 230, 211, 0.8);
+        }
+
+        .star.large {
+            width: 3px;
+            height: 3px;
+            box-shadow: 0 0 12px rgba(255, 140, 66, 0.9);
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Quantum particles */
+        .quantum-field {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -5;
+        }
+
+        .quantum-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--quantum-glow);
+            animation: quantumFloat 15s linear infinite;
+        }
+
+        @keyframes quantumFloat {
+            0% {
+                transform: translate(0, 100vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+                transform: translate(0, 90vh) scale(1);
+            }
+            90% {
+                opacity: 1;
+                transform: translate(0, -10vh) scale(1);
+            }
+            100% {
+                transform: translate(0, -20vh) scale(0);
+                opacity: 0;
+            }
+        }
+
+        /* Planetary orbits */
+        .orbital-system {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 800px;
+            height: 800px;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: -8;
+        }
+
+        .orbit {
+            position: absolute;
+            border: 1px solid rgba(255, 140, 66, 0.1);
+            border-radius: 50%;
+            animation: rotate 60s linear infinite;
+        }
+
+        .orbit.orbit-1 {
+            width: 200px;
+            height: 200px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .orbit.orbit-2 {
+            width: 400px;
+            height: 400px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-duration: 120s;
+            animation-direction: reverse;
+        }
+
+        .orbit.orbit-3 {
+            width: 600px;
+            height: 600px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-duration: 180s;
+        }
+
+        .planet {
+            position: absolute;
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--space-glow);
+        }
+
+        .planet.planet-1 {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-orange);
+            top: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .planet.planet-2 {
+            width: 12px;
+            height: 12px;
+            background: var(--accent-blue);
+            top: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .planet.planet-3 {
+            width: 6px;
+            height: 6px;
+            background: var(--accent-green);
+            top: -3px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        @keyframes rotate {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(13, 15, 26, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Orbitron', monospace;
+            font-weight: 900;
+            font-size: 1.5rem;
+            color: var(--accent-orange);
+            text-decoration: none;
+            text-shadow: 0 0 10px var(--space-glow);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            position: relative;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-orange);
+            text-shadow: 0 0 8px var(--space-glow);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-orange), var(--accent-blue));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .lang-toggle {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.875rem;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .lang-toggle:hover {
+            border-color: var(--accent-orange);
+            color: var(--accent-orange);
+            box-shadow: 0 0 15px var(--space-glow);
+        }
+
+        /* Mobile menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: rgba(13, 15, 26, 0.98);
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(20px);
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu .nav-links {
+            flex-direction: column;
+            padding: 2rem;
+            gap: 1.5rem;
+        }
+
+        /* Main container */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 0 4rem;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 700px;
+            z-index: 10;
+        }
+
+        .hero-greeting {
+            color: var(--accent-blue);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+            text-shadow: 0 0 10px var(--quantum-glow);
+        }
+
+        .hero-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            text-shadow: 0 0 20px rgba(232, 230, 211, 0.5);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--accent-orange);
+            font-weight: 700;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 15px var(--space-glow);
+            font-family: 'Orbitron', monospace;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 3rem;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        /* Outer Wilds style buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            border: 2px solid;
+            font-size: 1rem;
+            font-family: 'Orbitron', monospace;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-orange), #ff6b35);
+            color: var(--bg-primary);
+            border-color: var(--accent-orange);
+            box-shadow: 0 0 20px var(--space-glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px var(--space-glow);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent-blue);
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 15px var(--quantum-glow);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-blue);
+            color: var(--bg-primary);
+            transform: translateY(-3px);
+            box-shadow: 0 0 25px var(--quantum-glow);
+        }
+
+        /* Sections */
+        section {
+            padding: 8rem 0;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+        }
+
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 4rem;
+            color: var(--text-primary);
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-orange), var(--accent-blue));
+            box-shadow: 0 0 15px var(--space-glow);
+        }
+
+        /* About section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+            margin-bottom: 4rem;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .about-visual {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 300px;
+        }
+
+        .exploration-graphic {
+            font-size: 8rem;
+            opacity: 0.3;
+            position: relative;
+            animation: planetPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes planetPulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.1); opacity: 0.5; }
+        }
+
+        .exploration-points {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .point {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--accent-orange);
+            border-radius: 50%;
+            box-shadow: 0 0 15px var(--space-glow);
+            animation: signalPulse 3s ease-in-out infinite;
+        }
+
+        .point:nth-child(1) {
+            top: 20%;
+            left: 30%;
+            animation-delay: 0s;
+        }
+
+        .point:nth-child(2) {
+            top: 60%;
+            left: 70%;
+            animation-delay: 1s;
+        }
+
+        .point:nth-child(3) {
+            bottom: 30%;
+            left: 50%;
+            animation-delay: 2s;
+        }
+
+        @keyframes signalPulse {
+            0%, 100% {
+                opacity: 0.5;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.5);
+            }
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat {
+            background: linear-gradient(135deg, var(--bg-card), var(--bg-secondary));
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid var(--border);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .stat::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-orange), var(--accent-blue));
+        }
+
+        .stat:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 140, 66, 0.2);
+        }
+
+        .stat-number {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--accent-orange);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 15px var(--space-glow);
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 400;
+        }
+
+        /* Skills section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: linear-gradient(135deg, var(--bg-card), var(--bg-secondary));
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-category::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 140, 66, 0.05) 0%, transparent 70%);
+            transform: scale(0);
+            transition: transform 0.4s ease;
+        }
+
+        .skill-category:hover::before {
+            transform: scale(1);
+        }
+
+        .skill-category:hover {
+            border-color: var(--accent-orange);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 140, 66, 0.2);
+        }
+
+        .skill-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+            text-align: center;
+            filter: grayscale(50%);
+            transition: all 0.4s ease;
+        }
+
+        .skill-category:hover .skill-icon {
+            filter: grayscale(0%);
+            transform: scale(1.2);
+        }
+
+        .skill-category h3 {
+            color: var(--accent-orange);
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-family: 'Orbitron', monospace;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            justify-content: center;
+        }
+
+        .skill-tag {
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+            box-shadow: 0 0 10px var(--quantum-glow);
+        }
+
+        /* Experience section */
+        .experience-item {
+            background: linear-gradient(135deg, var(--bg-card), var(--bg-secondary));
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-orange), var(--accent-blue), var(--accent-green));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .experience-item:hover::before {
+            opacity: 1;
+        }
+
+        .experience-item:hover {
+            border-color: var(--accent-orange);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(255, 140, 66, 0.15);
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .experience-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-company {
+            color: var(--accent-orange);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .experience-date {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            background: var(--bg-secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+            border: 1px solid var(--border);
+            font-family: 'Space Mono', monospace;
+        }
+
+        .experience-description {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .experience-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .experience-tag {
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            padding: 0.4rem 1rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .experience-tag:hover {
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+            box-shadow: 0 0 10px var(--quantum-glow);
+        }
+
+        /* Contact section */
+        .contact {
+            text-align: center;
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(255, 140, 66, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+            z-index: 10;
+            position: relative;
+        }
+
+        .contact-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--accent-orange), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px var(--space-glow);
+        }
+
+        .contact-description {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            line-height: 1.7;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 3rem 0;
+            text-align: center;
+            color: var(--text-muted);
+            background: var(--bg-secondary);
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 10000;
+            padding: 2rem;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, var(--bg-card), var(--bg-secondary));
+            border: 2px solid var(--accent-orange);
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 0 50px var(--space-glow);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+            font-size: 1.5rem;
+        }
+
+        .modal-close:hover {
+            background: var(--accent-orange);
+            color: var(--bg-primary);
+            box-shadow: 0 0 15px var(--space-glow);
+        }
+
+        .modal-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .modal-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .modal-company {
+            color: var(--accent-orange);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .modal-meta {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .modal-section {
+            margin-bottom: 2rem;
+        }
+
+        .modal-section-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--accent-blue);
+            margin-bottom: 1rem;
+        }
+
+        .modal-description {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .modal-tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-tech-item {
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            padding: 0.6rem;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 0.8rem;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .modal-tech-item:hover {
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+            box-shadow: 0 0 10px var(--quantum-glow);
+        }
+
+        .modal-achievements {
+            list-style: none;
+        }
+
+        .modal-achievements li {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .modal-achievements li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-orange);
+            font-weight: bold;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            main {
+                padding: 0 1rem;
+            }
+
+            .hero {
+                padding: 8rem 0 4rem;
+                text-align: center;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+
+            .hero-cta {
+                justify-content: center;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .about-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .experience-header {
+                flex-direction: column;
+                align-items: flex-start;
+                text-align: left;
+            }
+
+            .modal {
+                padding: 1rem;
+            }
+
+            .modal-content {
+                padding: 2rem 1.5rem;
+            }
+
+            .orbital-system {
+                display: none;
+            }
+
+            .floating-element {
+                font-size: 2rem;
+            }
+
+            .exploration-icon {
+                font-size: 1.5rem;
+            }
+
+            /* Better button sizing on mobile */
+            .btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+                min-width: 180px;
+                justify-content: center;
+            }
+
+            /* Improve modal on mobile */
+            .modal-tech-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.5rem;
+            }
+
+            .modal-tech-item {
+                font-size: 0.7rem;
+                padding: 0.4rem;
+            }
+
+            /* Better contact section on mobile */
+            .contact-title {
+                font-size: 2rem;
+            }
+
+            .contact-description {
+                font-size: 1rem;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                padding: 0 1rem;
+            }
+
+            .hero {
+                padding: 6rem 0 3rem;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .about-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .stat {
+                padding: 1.5rem;
+            }
+
+            .skill-category {
+                padding: 1.5rem;
+            }
+
+            .experience-item {
+                padding: 1.5rem;
+            }
+
+            .btn {
+                min-width: 150px;
+                padding: 0.7rem 1.2rem;
+            }
+
+            .contact-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Exploration floating elements */
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: cosmicFloat 25
